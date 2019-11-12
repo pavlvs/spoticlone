@@ -1,3 +1,13 @@
+<?php 
+if (isset($_POST['loginButton'])) {
+	// Login button was pressed
+	
+}
+if (isset($_POST['registerButton'])) {
+	// register button was pressed
+	
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
