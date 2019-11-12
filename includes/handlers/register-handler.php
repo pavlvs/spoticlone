@@ -16,10 +16,6 @@ function sanitizeFormPassword($inputText) {
 	$inputText = strip_tags($inputText);
 	$inputText = str_replace(" ", "", $inputText);
 }
-if (isset($_POST['loginButton'])) {
-	// Login button was pressed
-
-}
 if (isset($_POST['registerButton'])) {
 	// register button was pressed
 	$username = sanitizeFormUsername($_POST['username']);
