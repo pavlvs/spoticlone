@@ -23,6 +23,7 @@ include "includes/handlers/login-handler.php";
         <form action="register.php" method="POST" id="loginForm">
         	<h2>Login to your account</h2>
         	<p>
+                <?php echo $account->getError(Constants::$loginFailed); ?>
         		<label for="loginUsername">Username</label>
         		<input type="text" name="loginUsername" id="loginUsername" value="" placeholder="e.g. bartSimpson" required>
         	</p>
