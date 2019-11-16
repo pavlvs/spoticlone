@@ -8,6 +8,8 @@ class Constants {
 	public static $passwordsDoNotMatch = "Your passwords do not match";
 	public static $passwordsCharacters = "Your password can only contain numbers and letters";
 	public static $passwordLength = "Your password must be between 5 and 30 characters long";
+	public static $usernameTaken = "That username already exists";
+	public static $emailTaken = "That email already exists";
 }
 
 ?>
