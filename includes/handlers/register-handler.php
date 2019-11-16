@@ -36,6 +36,7 @@ if (isset($_POST['registerButton'])) {
 
 	$success = $account->register($username, $firstName, $lastName, $email1, $email2, $password1, $password2);
 	if ($success) {
+		$_SESSION['userLoggedIn'] = $username;
 		header("Location:index.php");
 	}
 }
