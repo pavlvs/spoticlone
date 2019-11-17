@@ -27,8 +27,6 @@ class Account {
 		$this->validateEmails($em1, $em2);
 		$this->validatePasswords($pw1, $pw2);
 
-		var_dump($this->errorArray);
-
 		if (empty($this->errorArray) == true) {
 			return $this->insertUserDetails($un, $fn, $ln, $em1, $pw1);
 		} else {
@@ -107,7 +105,6 @@ class Account {
 			return;
 			# code...
 		}
-		echo strlen($pw1);
 		if (strlen($pw1) > 30 || strlen($pw1) < 5) {
 			// do not register
 			array_push($this->errorArray, Constants::$passwordLength);

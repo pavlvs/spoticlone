@@ -22,6 +22,24 @@ include "includes/handlers/login-handler.php";
 </head>
 
 <body>
+    <?php
+if (isset($_POST['registerButton'])) {
+	echo "<script>
+                        $(function() {
+                            $('#loginForm').hide();
+                            $('#registerForm').show();
+                        });
+                    </script>";
+} else {
+	echo "<script>
+                        $(function() {
+                            $('#loginForm').show();
+                            $('#registerForm').hide();
+                        });
+                    </script>";
+}
+?>
+
     <div id="background">
         <div id="loginContainer">
             <div id="inputContainer">

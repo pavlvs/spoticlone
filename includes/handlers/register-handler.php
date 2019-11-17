@@ -24,7 +24,6 @@ function sticky($name) {
 }
 
 if (isset($_POST['registerButton'])) {
-	echo $_POST['password1'];
 	// register button was pressed
 	$username = sanitizeFormUsername($_POST['username']);
 	$firstName = sanitizeFormString($_POST['firstName']);

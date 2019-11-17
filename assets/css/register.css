@@ -93,6 +93,10 @@ body {
     margin-top: 15px;
 }
 
+#inputContainer .errorMessage {
+    display: block;
+}
+
 #inputContainer button {
     background-color: transparent;
     border: 2px solid #fff;
@@ -113,8 +117,14 @@ body {
 .hasAccountText span {
     font-weight: bold;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .hasAccountText {
     text-align: center;
+}
+
+#registerForm,
+#loginForm {
+    display: none;
 }
