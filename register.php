@@ -35,6 +35,10 @@ include "includes/handlers/login-handler.php";
                         <input type="password" name="loginPassword" id="loginPassword" value="" placeholder="Your password" required>
                     </p>
                         <button type="submit" name="loginButton">LOG IN</button>
+
+                        <div class="hasAccountText">
+                            <span id="hideLogin">Don't have an account yet? Sign up here.</span>
+                        </div>
                 </form>
                 <form action="register.php" method="POST" id="registerForm">
                     <h2>Create your free account</h2>
@@ -75,6 +79,10 @@ include "includes/handlers/login-handler.php";
                         <input type="password" name="password2" id="password2" value="" placeholder="Your password" required>
                     </p>
                         <button type="submit" name="registerButton">Sign Up</button>
+
+                        <div class="hasAccountText">
+                            <span id="hideRegister">Already have an account? Login here.</span>
+                        </div>
                 </form>
             </div>
         </div>
