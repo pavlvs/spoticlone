@@ -157,3 +157,13 @@ body {
     top: 0;
     left: 0;
 }
+
+.navBar {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo img {
+    width: 32px;
+}
