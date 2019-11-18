@@ -20,7 +20,11 @@ if (isset($_SESSION['userLoggedIn'])) {
 <body>
 	<div id="nowPlayingBarContainer">
 		<div id="nowPlayingBar">
-			<div id="nowPlayingLeft"></div>
+			<div id="nowPlayingLeft">
+				<div class="content"><span class="albumLink">
+					<img src="assets/images/square.jpg" alt="square" class="albumArtwork">
+				</span></div>
+			</div>
 			<div id="nowPlayingCenter">
 				<div class="content playerControls">
 					<div class="buttons">
