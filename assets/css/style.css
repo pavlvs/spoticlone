@@ -143,3 +143,8 @@ body {
     position: relative;
     margin-top: 15px;
 }
+
+#topContainer {
+    min-height: 100%;
+    width: 100%;
+}
