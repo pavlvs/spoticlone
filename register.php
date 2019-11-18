@@ -48,7 +48,7 @@ if (isset($_POST['registerButton'])) {
                     <p>
                         <?php echo $account->getError(Constants::$loginFailed); ?>
                         <label for="loginUsername">Username</label>
-                        <input type="text" name="loginUsername" id="loginUsername" value="" placeholder="e.g. bartSimpson" required>
+                        <input type="text" name="loginUsername" id="loginUsername" value="<?php sticky("loginUsername");?>" placeholder="e.g. bartSimpson" required>
                     </p>
                     <p>
                         <label for="loginPassword">Password</label>
