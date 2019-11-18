@@ -21,9 +21,19 @@ if (isset($_SESSION['userLoggedIn'])) {
 	<div id="nowPlayingBarContainer">
 		<div id="nowPlayingBar">
 			<div id="nowPlayingLeft">
-				<div class="content"><span class="albumLink">
-					<img src="assets/images/square.jpg" alt="square" class="albumArtwork">
-				</span></div>
+				<div class="content">
+					<span class="albumLink">
+						<img src="assets/images/square.jpg" alt="square" class="albumArtwork">
+					</span>
+					<div class="trackInfo">
+						<span class="trackName">
+							Happy Foo
+						</span>
+						<span class="artistName">
+							Pavlvs X
+						</span>
+					</div>
+				</div>
 			</div>
 			<div id="nowPlayingCenter">
 				<div class="content playerControls">
