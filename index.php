@@ -31,6 +31,15 @@ if (isset($_SESSION['userLoggedIn'])) {
 						<button class="controlButton next" title="next button"><img src="assets/images/icons/next.png" alt="next button"></button>
 						<button class="controlButton repeat" title="repeat button"><img src="assets/images/icons/repeat.png" alt="repeat button"></button>
 					</div>
+					<div class="playbackBar">
+						<span class="progressTime current">0:00</span>
+						<div class="progressBar">
+							<div class="progressBarBg">
+								<div class="progress"></div>
+							</div>
+						</div>
+						<span class="progressTime remaining">0:00</span>
+					</div>
 				</div>
 			</div>
 			<div id="nowPlayingRight"></div>
