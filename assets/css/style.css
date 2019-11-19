@@ -14,6 +14,7 @@ body {
 * {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #fff;
+    letter-spacing: 1px;
 }
 
 #nowPlayingBarContainer {
@@ -237,6 +238,10 @@ body {
 
 .gridViewItem img {
     width: 100%;
+}
+
+.gridViewItem a {
+    text-decoration: none;
 }
 
 .gridViewInfo {
