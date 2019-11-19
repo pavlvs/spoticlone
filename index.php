@@ -21,6 +21,11 @@ if (isset($_SESSION['userLoggedIn'])) {
 	<div id="mainContainer">
 		<div id="topContainer">
 			<?php include "includes/navBarContainer.php"?>
+			<div id="mainViewContainer">
+				<div id="mainContent">
+
+				</div>
+			</div>
 		</div><!--End of topContainer -->
 		<?php include "includes/nowPlayingBarContainer.php"?>
 	</div><!--End of mainContainer -->
