@@ -38,6 +38,10 @@ body {
     min-width: 180px;
 }
 
+#nowPlayingRight {
+    margin-top: 17px;
+}
+
 #nowPlayingCenter {
     width: 40%;
     max-width: 700px;

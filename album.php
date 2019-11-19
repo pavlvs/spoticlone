@@ -6,14 +6,20 @@ if (isset($_GET['id'])) {
 	header("Location: index.php");
 }
 
-$albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE id='$albumId'");
-$album = mysqli_fetch_array($albumQuery);
+$album = new Album($con, $albumId);
 
-$artistId = $album['artist'];
+$artist = $album->getArtist();
 
-$artist = new Artist($con, $artistId);
-echo $artist->getName();
 ?>
+<div class="entityInfo">
+	<div class="leftSection">
+		<img src="<?php echo $album->getArtwork(); ?>" alt="">
+	</div>
+	<div class="rightSection">
+		<h2><?php echo $album->getTitle(); ?></h2>
+		<span>By <?php echo $artist->getName(); ?></span>
+	</div>
+</div>
 <h1 class="pageHeadingBig">You Might Also Like</h1>
 <?php include "includes/footer.php"?>
 
