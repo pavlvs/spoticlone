@@ -11,9 +11,8 @@ $album = mysqli_fetch_array($albumQuery);
 
 $artistId = $album['artist'];
 
-$artistQuery = mysqli_query($con, "SELECT name FROM artists WHERE id='$artistId'");
-$artist = mysqli_fetch_array($artistQuery);
-echo $artist['name'];
+$artist = new Artist($con, $artistId);
+echo $artist->getName();
 ?>
 <h1 class="pageHeadingBig">You Might Also Like</h1>
 <?php include "includes/footer.php"?>
