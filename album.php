@@ -37,6 +37,20 @@ foreach ($songIdArray as $songId) {
 		<img class="play" src="assets/images/icons/play-white.png">
 		<span class="trackNumber">$i</span>
 	</div>
+	<div class="trackInfo">
+		<span class="trackName">
+EOT;
+
+	echo $albumSong->getTitle();
+	echo <<<EOT
+		</span>
+		<span class="trackArtist">
+EOT;
+	echo $albumArtist->getName();
+	echo <<<EOT
+
+		</span>
+	</div>
 </li>
 EOT;
 	$i++;
