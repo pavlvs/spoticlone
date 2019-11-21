@@ -21,6 +21,18 @@ $artist = $album->getArtist();
 		<p><?php echo $album->getNumberOfSongs(); ?> song(s)</p>
 	</div>
 </div>
+
+<div class="tracklistContainer">
+	<ul class="tracklist">
+		<?php
+$songIdArray = $album->getSongIds();
+
+foreach ($songIdArray as $songId) {
+	echo $songId . "<br>";
+}
+?>
+	</ul>
+</div>
 <h1 class="pageHeadingBig">You Might Also Like</h1>
 <?php include "includes/footer.php"?>
 
