@@ -34,11 +34,11 @@ class Song {
 	}
 
 	public function getArtist() {
-		return new Artist($con, $this->artistId);
+		return new Artist($this->con, $this->artistId);
 	}
 
 	public function getAlbum() {
-		return new Album($con, $this->albumId);
+		return new Album($this->con, $this->albumId);
 	}
 
 	public function getGenre() {
