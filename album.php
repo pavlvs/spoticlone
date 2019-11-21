@@ -40,7 +40,6 @@ foreach ($songIdArray as $songId) {
 	<div class="trackInfo">
 		<span class="trackName">
 EOT;
-
 	echo $albumSong->getTitle();
 	echo <<<EOT
 		</span>
@@ -48,7 +47,16 @@ EOT;
 EOT;
 	echo $albumArtist->getName();
 	echo <<<EOT
-
+		</span>
+	</div>
+	<div class="trackOptions">
+		<img class="optionsButton" src="assets/images/icons/more.png">
+	</div>
+	<div class="trackDuration">
+		<span class="duration">
+EOT;
+	echo $albumSong->getDuration();
+	echo <<<EOT
 		</span>
 	</div>
 </li>
