@@ -2,7 +2,7 @@
 </div>
 </div>
 <!--End of topContainer -->
-<?php include "includes/nowPlayingBarContainer.php"?>
+<?php include "includes/nowPlayingBar.php"?>
 </div>
 <!--End of mainContainer -->
 </body>
