@@ -19,6 +19,7 @@ if (isset($_SESSION['userLoggedIn'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Spoticlone</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
 </head>
 

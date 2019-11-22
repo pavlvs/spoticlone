@@ -8,7 +8,18 @@ while ($row = mysqli_fetch_array($songQuery)) {
 $jsonArray = json_encode($resultArray);
 ?>
 <script>
-    console.log(<?php echo $jsonArray; ?>);
+    $(function() {
+        currentPlaylist = <?php echo $jsonArray; ?>;
+        audioElement = new Audio();
+        setTrack(currentPlaylist[0], currentPlaylist, false);
+    });
+
+    function setTrack(trackId, newPlaylist, play) {
+        audioElement.setTrack("assets/music/bensound-clearday.mp3");
+        if (play) {
+            audioElement.play();
+        }
+    }
 </script>
 <div id="nowPlayingBarContainer">
     <div id="nowPlayingBar">
