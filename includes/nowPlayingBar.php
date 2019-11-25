@@ -2,7 +2,7 @@
 $songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
 $resultArray = array();
 while ($row = mysqli_fetch_array($songQuery)) {
-	array_push($resultArray, $row['id']);
+    array_push($resultArray, $row['id']);
 }
 
 $jsonArray = json_encode($resultArray);
@@ -20,6 +20,18 @@ $jsonArray = json_encode($resultArray);
             audioElement.play();
         }
     }
+
+    function playSong() {
+        $(".controlButton.play").hide();
+        $(".controlButton.pause").show();
+		audioElement.play();
+	}
+
+	function pauseSong() {
+        $(".controlButton.pause").hide();
+        $(".controlButton.play").show();
+ 		audioElement.pause();
+	}
 </script>
 <div id="nowPlayingBarContainer">
     <div id="nowPlayingBar">
@@ -44,8 +56,8 @@ $jsonArray = json_encode($resultArray);
                 <div class="buttons">
                     <button class="controlButton shuffle" title="Shuffle button"><img src="assets/images/icons/shuffle.png" alt="shuffle button"></button>
                     <button class="controlButton previous" title="previous button"><img src="assets/images/icons/previous.png" alt="previous button"></button>
-                    <button class="controlButton play" title="play button"><img src="assets/images/icons/play.png" alt="play button"></button>
-                    <button class="controlButton pause" title="pause button" style="display:none"><img src="assets/images/icons/pause.png" alt="pause button"></button>
+                    <button class="controlButton play" title="play button"><img src="assets/images/icons/play.png" alt="play button" onclick="playSong()"></button>
+                    <button class="controlButton pause" title="pause button" style="display:none"><img src="assets/images/icons/pause.png" alt="pause button" onclick="pauseSong()"></button>
                     <button class="controlButton next" title="next button"><img src="assets/images/icons/next.png" alt="next button"></button>
                     <button class="controlButton repeat" title="repeat button"><img src="assets/images/icons/repeat.png" alt="repeat button"></button>
                 </div>
