@@ -16,4 +16,6 @@ function Audio() {
     this.pause = function() {
       this.audio.pause();
     }
+
+
 }
