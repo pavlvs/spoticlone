@@ -18,6 +18,17 @@ $jsonArray = json_encode($resultArray);
         $.post("includes/handlers/ajax/getSongJson.php", {songId: trackId },  function(data) {
 
             var track = JSON.parse(data);
+            console.log(track.title);
+            $(".trackName").text(track.title);
+            $.post("includes/handlers/ajax/getArtistJson.php", {artistId: track.artist },  function(data) {
+                var artist = JSON.parse(data);
+                $(".artistName").text(artist.name);
+            });
+            $.post("includes/handlers/ajax/getAlbumJson.php", {albumId: track.album },  function(data) {
+                var album = JSON.parse(data);
+                $("img.albumArtwork").attr("src", album.artworkPath);
+            });
+            audioElement.setTrack(track.path);
             audioElement.setTrack(track.path);
             audioElement.play();
         });
@@ -43,15 +54,11 @@ $jsonArray = json_encode($resultArray);
         <div id="nowPlayingLeft">
             <div class="content">
                 <span class="albumLink">
-                    <img src="assets/images/square.jpg" alt="square" class="albumArtwork">
+                    <img src="" alt="square" class="albumArtwork">
                 </span>
                 <div class="trackInfo">
-                    <span class="trackName">
-                        Happy Foo
-                    </span>
-                    <span class="artistName">
-                        Pavlvs X
-                    </span>
+                    <span class="trackName"> </span>
+                    <span class="artistName"></span>
                 </div>
             </div>
         </div>
