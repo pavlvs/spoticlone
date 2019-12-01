@@ -31,7 +31,7 @@ $jsonArray = json_encode($resultArray);
             playSong();
         });
         if (play) {
-            audioElement.play();
+            // audioElement.play();
         }
     }
 
