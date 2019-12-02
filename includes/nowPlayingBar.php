@@ -22,11 +22,30 @@ $jsonArray = json_encode($resultArray);
                 //set time of song depending on position of mouse
                 timeFromOffset(e, this);
             }
-
         })
 
         $(".playbackBar .progressBar").mouseup(function(e){
             timeFromOffset(e, this);
+        })
+
+        $(".volumeBar .progressBar").mousedown(function(){
+            mouseDown = true;
+        })
+
+        $(".volumeBar .progressBar").mousemove(function(e){
+            if (mouseDown == true) {
+                var percentage = e.offsetX / $(this).width();
+                if (percentage >=0 && percentage <= 1) {
+                    audioElement.audio.volume = percentage;
+                }
+            }
+        })
+
+        $(".volumeBar .progressBar").mouseup(function(e){
+            var percentage = e.offsetX / $(this).width();
+            if (percentage >=0 && percentage <= 1) {
+                audioElement.audio.volume = percentage;
+            }
         })
 
         $(document).mouseup(function(){
