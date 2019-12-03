@@ -1,10 +1,11 @@
 /* eslint-disable no-redeclare */
 var currentPlaylist = [];
+var shuffledPlaylist = [];
 var audioElement;
 var mouseDown = false;
 var currentIndex = 0;
 var repeat = false;
-
+var shuffle = false;
 
 function formatTime(seconds) {
     var time = Math.round(seconds);
