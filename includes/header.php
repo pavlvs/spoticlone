@@ -5,9 +5,9 @@ include "includes/classes/Album.php";
 include "includes/classes/Song.php";
 
 if (isset($_SESSION['userLoggedIn'])) {
-	$userLoggedIn = $_SESSION['userLoggedIn'];
+    $userLoggedIn = $_SESSION['userLoggedIn'];
 } else {
-	header("Location: register.php");
+    header("Location: register.php");
 }
 ?>
 <!DOCTYPE html>
@@ -19,13 +19,14 @@ if (isset($_SESSION['userLoggedIn'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Spoticlone</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="assets/js/jquery-3.4.1.js"></script>
     <script src="assets/js/script.js"></script>
 </head>
 
 <body>
     <div id="mainContainer">
         <div id="topContainer">
-            <?php include "includes/navBarContainer.php"?>
+            <?php include "includes/navBarContainer.php" ?>
             <div id="mainViewContainer">
                 <div id="mainContent">
