@@ -2,7 +2,7 @@
 $songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
 $resultArray = array();
 while ($row = mysqli_fetch_array($songQuery)) {
-    array_push($resultArray, $row['id']);
+	array_push($resultArray, $row['id']);
 }
 
 $jsonArray = json_encode($resultArray);
@@ -65,7 +65,22 @@ $jsonArray = json_encode($resultArray);
 
     }
 
+    function prevSong() {
+        if (audioElement.audio.currentTime >= 3 || currentIndex == 0) {
+            audioElement.setTime(0);
+        }else {
+            currentIndex--;
+            setTrack(currentPlaylist[currentIndex], currentPlaylist, true);
+        }
+    }
+
     function nextSong() {
+        if (repeat) {
+            audioElement.setTime(0);
+            playSong();
+            return;
+        }
+
         if (currentIndex == currentPlaylist.length - 1) {
             currentIndex = 0;
         } else {
@@ -76,12 +91,20 @@ $jsonArray = json_encode($resultArray);
         setTrack(trackToPlay, currentPlaylist, true);
     }
 
+    function setRepeat() {
+        repeat = !repeat;
+        var imageName = repeat ? "repeat-active.png" : "repeat.png";
+        $('.controlButton.repeat img').attr('src', 'assets/images/icons/' + imageName);
+    }
+
     function setTrack(trackId, newPlaylist, play) {
+        currentIndex = currentPlaylist.indexOf(trackId);
+        pauseSong();
+
         $.post("includes/handlers/ajax/getSongJson.php", {
             songId: trackId
         }, function(data) {
 
-            currentIndex = currentPlaylist.indexOf(trackId);
 
             var track = JSON.parse(data);
             $(".trackName").text(track.title);
@@ -140,11 +163,11 @@ $jsonArray = json_encode($resultArray);
             <div class="content playerControls">
                 <div class="buttons">
                     <button class="controlButton shuffle" title="Shuffle button"><img src="assets/images/icons/shuffle.png" alt="shuffle button"></button>
-                    <button class="controlButton previous" title="previous button"><img src="assets/images/icons/previous.png" alt="previous button"></button>
+                    <button class="controlButton previous" title="previous button"><img src="assets/images/icons/previous.png" alt="previous button" onclick="prevSong()"></button>
                     <button class="controlButton play" title="play button"><img src="assets/images/icons/play.png" alt="play button" onclick="playSong()"></button>
                     <button class="controlButton pause" title="pause button" style="display:none"><img src="assets/images/icons/pause.png" alt="pause button" onclick="pauseSong()"></button>
                     <button class="controlButton next" title="next button"><img src="assets/images/icons/next.png" alt="next button" onclick="nextSong()"></button>
-                    <button class="controlButton repeat" title="repeat button"><img src="assets/images/icons/repeat.png" alt="repeat button"></button>
+                    <button class="controlButton repeat" title="repeat button"><img src="assets/images/icons/repeat.png" alt="repeat button" onclick="setRepeat()"></button>
                 </div>
                 <div class="playbackBar">
                     <span class="progressTime current">0:00</span>
