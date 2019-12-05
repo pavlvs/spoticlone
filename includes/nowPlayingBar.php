@@ -2,7 +2,7 @@
 $songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
 $resultArray = array();
 while ($row = mysqli_fetch_array($songQuery)) {
-	array_push($resultArray, $row['id']);
+    array_push($resultArray, $row['id']);
 }
 
 $jsonArray = json_encode($resultArray);
@@ -68,7 +68,7 @@ $jsonArray = json_encode($resultArray);
     function prevSong() {
         if (audioElement.audio.currentTime >= 3 || currentIndex == 0) {
             audioElement.setTime(0);
-        }else {
+        } else {
             currentIndex--;
             setTrack(currentPlaylist[currentIndex], currentPlaylist, true);
         }
@@ -107,9 +107,32 @@ $jsonArray = json_encode($resultArray);
         shuffle = !shuffle;
         var imageName = shuffle ? "shuffle-active.png" : "shuffle.png";
         $('.controlButton.shuffle img').attr('src', 'assets/images/icons/' + imageName);
+
+        if (shuffle) {
+            //randomize playlist
+        } else {
+            //shuffle has been deactivated
+            shuffleArray(shuffledPlaylist);
+            //go back to regular list
+        }
+    }
+
+    function shuffleArray(a) {
+        var j, x, i;
+        for (var i = a.length; i; i++) {
+            j = Math.floor(Math.random() * i)
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
     }
 
     function setTrack(trackId, newPlaylist, play) {
+        if (newPlaylist != currentPlaylist) {
+            currentPlaylist = newPlaylist;
+            shuffledPlaylist = currentPlaylist.slice();
+            shuffleArray(shuffledPlaylist);
+        }
         currentIndex = currentPlaylist.indexOf(trackId);
         pauseSong();
 
@@ -174,7 +197,7 @@ $jsonArray = json_encode($resultArray);
         <div id="nowPlayingCenter">
             <div class="content playerControls">
                 <div class="buttons">
-                    <button class="controlButton shuffle" title="Shuffle button" ><img src="assets/images/icons/shuffle.png" alt="shuffle button" onclick="setShuffle()"></button>
+                    <button class="controlButton shuffle" title="Shuffle button"><img src="assets/images/icons/shuffle.png" alt="shuffle button" onclick="setShuffle()"></button>
                     <button class="controlButton previous" title="previous button"><img src="assets/images/icons/previous.png" alt="previous button" onclick="prevSong()"></button>
                     <button class="controlButton play" title="play button"><img src="assets/images/icons/play.png" alt="play button" onclick="playSong()"></button>
                     <button class="controlButton pause" title="pause button" style="display:none"><img src="assets/images/icons/pause.png" alt="pause button" onclick="pauseSong()"></button>

@@ -1,5 +1,6 @@
 /* eslint-disable no-redeclare */
 var currentPlaylist = [];
+var shuffledPlaylist = [];
 var audioElement;
 var mouseDown = false;
 var currentIndex = 0;
