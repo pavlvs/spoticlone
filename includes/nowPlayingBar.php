@@ -146,7 +146,7 @@ $jsonArray = json_encode($resultArray);
 
 
             var track = JSON.parse(data);
-            $(".trackName").text(track.title);
+            $("#nowPlayingLeft .trackName").text(track.title);
             $.post("includes/handlers/ajax/getArtistJson.php", {
                 artistId: track.artist
             }, function(data) {

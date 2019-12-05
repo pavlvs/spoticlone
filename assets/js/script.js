@@ -2,6 +2,7 @@
 //mytest comment
 var currentPlaylist = [];
 var shuffledPlaylist = [];
+var tempPlaylist = [];
 var audioElement;
 var mouseDown = false;
 var currentIndex = 0;
