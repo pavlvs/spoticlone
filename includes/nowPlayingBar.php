@@ -154,14 +154,12 @@ $jsonArray = json_encode($resultArray);
                 $("img.albumArtwork").attr("src", album.artworkPath);
             });
             audioElement.setTrack(track);
-            // playSong();
         audioElement.play();
-        });
+
         if (play == true) {
-        console.log('we are playing something');
-        console.log(audioElement);
-        audioElement.play();
+            playSong();
         }
+        });
     }
 
     function playSong() {
