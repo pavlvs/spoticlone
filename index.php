@@ -1,4 +1,6 @@
-<?php include "includes/header.php"?>
+<?php
+include "includes/includedFiles.php";
+?>
 <h1 class="pageHeadingBig">You Might Also Like</h1>
 <div class="gridViewContainer">
 	<?php
@@ -20,5 +22,3 @@ while ($row = mysqli_fetch_array($albumQuery)) {
 }
 ?>
 </div>
-<?php include "includes/footer.php"?>
-

@@ -140,11 +140,7 @@ $jsonArray = json_encode($resultArray);
 
         pauseSong();
 
-        $.post("includes/handlers/ajax/getSongJson.php", {
-            songId: trackId
-        }, function(data) {
-
-
+        $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
             var track = JSON.parse(data);
             $("#nowPlayingLeft .trackName").text(track.title);
             $.post("includes/handlers/ajax/getArtistJson.php", {
@@ -153,17 +149,18 @@ $jsonArray = json_encode($resultArray);
                 var artist = JSON.parse(data);
                 $(".artistName").text(artist.name);
             });
-            $.post("includes/handlers/ajax/getAlbumJson.php", {
-                albumId: track.album
-            }, function(data) {
+            $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
                 var album = JSON.parse(data);
                 $("img.albumArtwork").attr("src", album.artworkPath);
             });
             audioElement.setTrack(track);
-            playSong();
+            // playSong();
+        audioElement.play();
         });
-        if (play) {
-            // audioElement.play();
+        if (play == true) {
+        console.log('we are playing something');
+        console.log(audioElement);
+        audioElement.play();
         }
     }
 

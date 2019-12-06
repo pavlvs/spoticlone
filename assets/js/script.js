@@ -10,12 +10,19 @@ var repeat = false;
 var shuffle = false;
 var userLoggedIn;
 
+function openPage(url) {
+
+    if (url.indexOf("?") == -1) {
+        url = url + "?";
+    }
+    var encodedUrl = encodeURI(url + "&userloggedIn=" + userLoggedIn);
+    $('#mainContent').load(encodedUrl);
+}
+
 function formatTime(seconds) {
     var time = Math.round(seconds);
     var minutes = Math.floor(time / 60); // Rounds the minutes down
-    // eslint-disable-next-line no-redeclare
     var seconds = time - (minutes * 60);
-
     var extraZero = (seconds < 10) ? '0' : '';
 
     return minutes + ':' + extraZero + seconds;
