@@ -429,6 +429,10 @@ input:focus {
     outline: none;
 }
 
+.artistContainer h2 {
+    text-align: center;
+}
+
 .searchResultsRow {
     padding: 15px 10px;
 }

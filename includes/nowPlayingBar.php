@@ -147,13 +147,13 @@ $jsonArray = json_encode($resultArray);
                 artistId: track.artist
             }, function(data) {
                 var artist = JSON.parse(data);
-                $(".artistName").text(artist.name);
-                $(".artistName").attr("onclick", "openPage('artist.php?id=" + artist.id + "')");
+                $(".trackInfo .artistName span").text(artist.name);
+                $(".trackInfo .artistName span").attr("onclick", "openPage('artist.php?id=" + artist.id + "')");
             });
             $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
                 var album = JSON.parse(data);
                 $("img.albumArtwork").attr("src", album.artworkPath);
-                $(".albumLink img").attr("onclick", "openPage('album.php?id=" + album.id + "')");
+                $(".content .albumLink img").attr("onclick", "openPage('album.php?id=" + album.id + "')");
                 $(".trackName span").attr("onclick", "openPage('album.php?id=" + album.id + "')");
             });
             audioElement.setTrack(track);
