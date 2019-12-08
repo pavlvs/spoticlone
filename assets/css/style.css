@@ -429,6 +429,10 @@ input:focus {
     outline: none;
 }
 
+.artistContainer {
+    padding-bottom: 12px;
+}
+
 .artistContainer h2 {
     text-align: center;
 }
