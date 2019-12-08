@@ -6,36 +6,36 @@ body {
 }
 
 body {
+    background: #181818;
     font-size: 14px;
     min-width: 720px;
-    background: #181818;
 }
 
 * {
+    color: #fff;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     letter-spacing: 1px;
-    color: #fff;
 }
 
 #nowPlayingBarContainer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    min-width: 620px;
     background-color: #282828;
+    bottom: 0;
+    min-width: 620px;
+    position: fixed;
+    width: 100%;
 }
 
 #nowPlayingBar {
-    display: flex;
     box-sizing: border-box;
+    display: flex;
     height: 90px;
     padding: 16px;
 }
 
 #nowPlayingLeft,
 #nowPlayingRight {
-    width: 30%;
     min-width: 180px;
+    width: 30%;
 }
 
 #nowPlayingRight {
@@ -43,16 +43,16 @@ body {
 }
 
 #nowPlayingCenter {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    width: 40%;
     max-width: 700px;
-    align-items: center;
+    width: 40%;
 }
 
 #nowPlayingBar .content {
-    width: 100%;
     height: 57px;
+    width: 100%;
 }
 
 .playerControls .buttons {
@@ -61,20 +61,20 @@ body {
 }
 
 .controlButton {
-    vertical-align: middle;
-    border: none;
     background-color: transparent;
+    border: none;
+    vertical-align: middle;
 }
 
 .controlButton img {
-    width: 20px;
     height: 20px;
+    width: 20px;
 }
 
 .controlButton.play img,
 .controlButton.pause img {
-    width: 32px;
     height: 32px;
+    width: 32px;
 }
 
 .controlButton:hover {
@@ -82,17 +82,17 @@ body {
 }
 
 .progressTime {
+    color: #a0a0a0;
     font-size: 11px;
     min-width: 40px;
     text-align: center;
-    color: #a0a0a0;
 }
 
 .progressBar {
-    display: inline-flex;
-    width: 100%;
-    height: 12px;
     cursor: pointer;
+    display: inline-flex;
+    height: 12px;
+    width: 100%;
 }
 
 .playbackBar {
@@ -100,17 +100,17 @@ body {
 }
 
 .progressBarBg {
-    width: 100%;
-    height: 4px;
-    border-radius: 2px;
     background-color: #404040;
+    border-radius: 2px;
+    height: 4px;
+    width: 100%;
 }
 
 .progress {
-    width: 100%;
-    height: 4px;
-    border-radius: 2px;
     background-color: #878484;
+    border-radius: 2px;
+    height: 4px;
+    width: 100%;
 }
 
 .playbackBar .progressBar {
@@ -118,11 +118,11 @@ body {
 }
 
 #nowPlayingLeft .albumArtwork {
+    background-size: cover;
     float: left;
-    max-width: 57px;
     height: 100%;
     margin-right: 15px;
-    background-size: cover;
+    max-width: 57px;
 }
 
 .trackInfo {
@@ -131,13 +131,13 @@ body {
 
 #nowPlayingLeft .trackInfo .trackName {
     display: inline-block;
-    width: 100%;
     margin: 6px 0;
+    width: 100%;
 }
 
 #nowPlayingLeft .trackInfo .artistName {
-    font-size: 12px;
     color: #a0a0a0;
+    font-size: 12px;
 }
 
 .volumeBar {
@@ -151,22 +151,22 @@ body {
 }
 
 .nowPlayingRight {
-    position: relative;
     margin-top: 15px;
+    position: relative;
 }
 
 #topContainer {
-    width: 100%;
     min-height: 100%;
+    width: 100%;
 }
 
 #navBarContainer {
+    background-color: #000;
+    height: 100vh;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
     width: 220px;
-    height: 100vh;
-    background-color: #000;
 }
 
 .navBar {
@@ -184,22 +184,22 @@ body {
 }
 
 .navBar .group {
-    padding: 10px 0;
     border-top: 1px solid #a0a0a0;
+    padding: 10px 0;
 }
 
 .navItem {
+    display: block;
     font-size: 14px;
     font-weight: 700;
-    position: relative;
-    display: block;
-    padding: 10px 0;
     letter-spacing: 1px;
+    padding: 10px 0;
+    position: relative;
 }
 
 .navItemLink {
-    text-decoration: none;
     color: #a0a0a0;
+    text-decoration: none;
 }
 
 .navItemLink:hover {
@@ -208,8 +208,8 @@ body {
 
 .navItemLink .icon {
     position: absolute;
-    top: 6px;
     right: 0;
+    top: 6px;
     width: 25px;
 }
 
@@ -218,9 +218,9 @@ body {
 }
 
 #mainViewContainer {
-    width: calc(100% - 220px);
     margin-left: 220px;
     padding-bottom: 90px;
+    width: calc(100% - 220px);
 }
 
 #mainContent {
@@ -234,10 +234,10 @@ body {
 
 .gridViewItem {
     display: inline-block;
-    width: 29%;
-    max-width: 200px;
-    margin-right: 20px;
     margin-bottom: 20px;
+    margin-right: 20px;
+    max-width: 200px;
+    width: 29%;
 }
 
 .gridViewItem img {
@@ -253,20 +253,20 @@ body {
     overflow: hidden;
     padding: 5px 0;
     text-align: center;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .entityInfo {
     display: inline-block;
-    width: 100%;
     padding: 40px 0 10px 0;
+    width: 100%;
 }
 
 .leftSection {
     float: left;
-    width: 30%;
     max-width: 250px;
+    width: 30%;
 }
 
 .leftSection img {
@@ -287,9 +287,9 @@ body {
 }
 
 .rightSection p {
+    color: #939393;
     font-size: 12px;
     font-weight: 700;
-    color: #939393;
 }
 
 .tracklist {
@@ -298,8 +298,8 @@ body {
 
 .tracklistRow {
     height: 40px;
-    padding: 15px 10px;
     list-style: none;
+    padding: 15px 10px;
 }
 
 .tracklistRow span {
@@ -316,10 +316,10 @@ body {
 }
 
 .trackCount img {
+    cursor: pointer;
     position: absolute;
     visibility: hidden;
     width: 20px;
-    cursor: pointer;
 }
 
 .tracklistRow:hover .trackCount img {
@@ -345,8 +345,8 @@ body {
 
 .tracklistRow .trackOptions {
     float: left;
-    width: 5%;
     text-align: right;
+    width: 5%;
 }
 
 .tracklistRow .trackOptions img {
@@ -360,8 +360,8 @@ body {
 
 .tracklistRow .trackDuration {
     float: left;
-    width: 12%;
     text-align: right;
+    width: 12%;
 }
 
 .tracklistRow .trackName {
@@ -375,15 +375,15 @@ body {
 
 .button {
     color: #fff;
-    cursor: pointer;
-    margin-bottom: 10px;
     background-color: transparent;
+    border-radius: 500px;
+    border: 2px solid #fff;
+    cursor: pointer;
     font-weight: 500;
     letter-spacing: 2;
-    border: 2px solid #fff;
-    border-radius: 500px;
-    padding: 15px;
+    margin-bottom: 10px;
     min-width: 130px;
+    padding: 15px;
 }
 
 .button.spoticlone {
@@ -403,4 +403,28 @@ body {
 
 [role=link] {
     cursor: pointer;
+}
+
+.searchContainer {
+    background-color: #242424;
+    padding: 20px 28px;
+}
+
+.searchContainer h4 {
+    font-weight: 300;
+    margin: 0;
+}
+
+.searchInput {
+    background-color: transparent;
+    border: none;
+    color: #FFF;
+    font-size: 62px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
 }
