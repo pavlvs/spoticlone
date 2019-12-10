@@ -9,5 +9,9 @@ class User {
 		$this->con = $con;
 		$this->username = $username;
 	}
+
+	public function getUsername() { # code...
+		return $this->username;
+	}
 }
 ?>
