@@ -17,6 +17,8 @@ body {
     letter-spacing: 1px;
 }
 
+/* Now Playing Bar */
+
 #nowPlayingBarContainer {
     background-color: #282828;
     bottom: 0;
@@ -160,6 +162,8 @@ body {
     width: 100%;
 }
 
+/* NavBar Container */
+
 #navBarContainer {
     background-color: #000;
     height: 100vh;
@@ -216,6 +220,8 @@ body {
 .nowPlayingRight {
     margin-top: 15px;
 }
+
+/* Main View */
 
 #mainViewContainer {
     margin-left: 220px;
