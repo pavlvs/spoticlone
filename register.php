@@ -1,9 +1,8 @@
 <?php
-include "includes/config.php";
-include "includes/classes/Account.php";
+include "core/init.php";
 include "includes/classes/Constants.php";
 
-$account = new Account($con);
+$account = new Account();
 
 include "includes/handlers/register-handler.php";
 include "includes/handlers/login-handler.php";
@@ -23,22 +22,22 @@ include "includes/handlers/login-handler.php";
 
 <body>
     <?php
-if (isset($_POST['registerButton'])) {
-	echo "<script>
+    if (isset($_POST['registerButton'])) {
+        echo "<script>
                         $(function() {
                             $('#loginForm').hide();
                             $('#registerForm').show();
                         });
                     </script>";
-} else {
-	echo "<script>
+    } else {
+        echo "<script>
                         $(function() {
                             $('#loginForm').show();
                             $('#registerForm').hide();
                         });
                     </script>";
-}
-?>
+    }
+    ?>
 
     <div id="background">
         <div id="loginContainer">
@@ -48,44 +47,44 @@ if (isset($_POST['registerButton'])) {
                     <p>
                         <?php echo $account->getError(Constants::$loginFailed); ?>
                         <label for="loginUsername">Username</label>
-                        <input type="text" name="loginUsername" id="loginUsername" value="<?php sticky("loginUsername");?>" placeholder="e.g. bartSimpson" required>
+                        <input type="text" name="loginUsername" id="loginUsername" value="<?php sticky("loginUsername"); ?>" placeholder="e.g. bartSimpson" required>
                     </p>
                     <p>
                         <label for="loginPassword">Password</label>
                         <input type="password" name="loginPassword" id="loginPassword" value="" placeholder="Your password" required>
                     </p>
-                        <button type="submit" name="loginButton">LOG IN</button>
+                    <button type="submit" name="loginButton">LOG IN</button>
 
-                        <div class="hasAccountText">
-                            <span id="hideLogin">Don't have an account yet? Sign up here.</span>
-                        </div>
+                    <div class="hasAccountText">
+                        <span id="hideLogin">Don't have an account yet? Sign up here.</span>
+                    </div>
                 </form>
                 <form action="register.php" method="POST" id="registerForm">
                     <h2>Create your free account</h2>
                     <p>
                         <?php echo $account->getError(Constants::$usernameCharacters); ?>
                         <label for="username">Username</label>
-                        <input type="text" name="username" id="username" value="<?php sticky("username");?>" placeholder="e.g. bartSimpson" required>
+                        <input type="text" name="username" id="username" value="<?php sticky("username"); ?>" placeholder="e.g. bartSimpson" required>
                     </p>
                     <p>
                         <?php echo $account->getError(Constants::$firstNameCharacters); ?>
                         <label for="firstName">First name</label>
-                        <input type="text" name="firstName" id="firstName" value="<?php sticky("firstName");?>" placeholder="e.g. Bart" required>
+                        <input type="text" name="firstName" id="firstName" value="<?php sticky("firstName"); ?>" placeholder="e.g. Bart" required>
                     </p>
                     <p>
                         <?php echo $account->getError(Constants::$lastNameCharacters); ?>
                         <label for="lastName">Last name</label>
-                        <input type="text" name="lastName" id="lastName" value="<?php sticky("lastName");?>" placeholder="e.g. Simpson" required>
+                        <input type="text" name="lastName" id="lastName" value="<?php sticky("lastName"); ?>" placeholder="e.g. Simpson" required>
                     </p>
                     <p>
                         <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
-                        <?php $account->getError(Constants::$invalidEmail);?>
+                        <?php $account->getError(Constants::$invalidEmail); ?>
                         <label for="email1">Email</label>
-                        <input type="email" name="email1" id="email1" value="<?php sticky("email1");?>" placeholder="e.g. bart@simpson.com" required>
+                        <input type="email" name="email1" id="email1" value="<?php sticky("email1"); ?>" placeholder="e.g. bart@simpson.com" required>
                     </p>
                     <p>
                         <label for="email2">Confirm Email</label>
-                        <input type="email" name="email2" id="email2" value="<?php sticky("email2");?>" placeholder="e.g. bart@simpson.com" required>
+                        <input type="email" name="email2" id="email2" value="<?php sticky("email2"); ?>" placeholder="e.g. bart@simpson.com" required>
                     </p>
                     <p>
                         <?php echo $account->getError(Constants::$passwordLength); ?>
@@ -98,11 +97,11 @@ if (isset($_POST['registerButton'])) {
                         <label for="password2">Confirm Password</label>
                         <input type="password" name="password2" id="password2" value="" placeholder="Your password" required>
                     </p>
-                        <button type="submit" name="registerButton">Sign Up</button>
+                    <button type="submit" name="registerButton">Sign Up</button>
 
-                        <div class="hasAccountText">
-                            <span id="hideRegister">Already have an account? Login here.</span>
-                        </div>
+                    <div class="hasAccountText">
+                        <span id="hideRegister">Already have an account? Login here.</span>
+                    </div>
                 </form>
             </div>
             <div id="loginText">

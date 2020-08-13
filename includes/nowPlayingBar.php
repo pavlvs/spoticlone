@@ -1,5 +1,5 @@
 <?php
-$songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
+$songQuery = mysqli_query($db, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
 $resultArray = array();
 while ($row = mysqli_fetch_array($songQuery)) {
     array_push($resultArray, $row['id']);
@@ -140,7 +140,9 @@ $jsonArray = json_encode($resultArray);
 
         pauseSong();
 
-        $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
+        $.post("includes/handlers/ajax/getSongJson.php", {
+            songId: trackId
+        }, function(data) {
             var track = JSON.parse(data);
             $("#nowPlayingLeft .trackName").text(track.title);
             $.post("includes/handlers/ajax/getArtistJson.php", {
@@ -150,18 +152,20 @@ $jsonArray = json_encode($resultArray);
                 $(".trackInfo .artistName span").text(artist.name);
                 $(".trackInfo .artistName span").attr("onclick", "openPage('artist.php?id=" + artist.id + "')");
             });
-            $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
+            $.post("includes/handlers/ajax/getAlbumJson.php", {
+                albumId: track.album
+            }, function(data) {
                 var album = JSON.parse(data);
                 $("img.albumArtwork").attr("src", album.artworkPath);
                 $(".content .albumLink img").attr("onclick", "openPage('album.php?id=" + album.id + "')");
                 $(".trackName span").attr("onclick", "openPage('album.php?id=" + album.id + "')");
             });
             audioElement.setTrack(track);
-        audioElement.play();
+            audioElement.play();
 
-        if (play == true) {
-            playSong();
-        }
+            if (play == true) {
+                playSong();
+            }
         });
     }
 

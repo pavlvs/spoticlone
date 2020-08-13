@@ -6,8 +6,8 @@ if (isset($_GET['id'])) {
 	header("Location: index.php");
 }
 
-$playlist = new Playlist($con, $playlistId);
-$owner = new User($con, $playlist->getOwner());
+$playlist = new Playlist($db, $playlistId);
+$owner = new User($db, $playlist->getOwner());
 ?>
 
 <div class="entityInfo">
@@ -31,15 +31,15 @@ $owner = new User($con, $playlist->getOwner());
 
 		$i = 1;
 		foreach ($songIdArray as $songId) {
-			$playlistSong = new Song($con, $songId);
+			$playlistSong = new Song($db, $songId);
 			$songArtist = $playlistSong->getArtist();
-echo <<<EOT
+			echo <<<EOT
 		<li class="tracklistRow">
 			<div class="trackCount">
 				<img class="play" src="assets/images/icons/play-white.png" onclick="setTrack('
 EOT;
-		echo $playlistSong->getId();
-echo <<<EOT
+			echo $playlistSong->getId();
+			echo <<<EOT
 		', tempPlaylist, true)">
 				<span class="trackNumber">$i</span>
 			</div>
@@ -47,12 +47,12 @@ echo <<<EOT
 				<span class="trackName">
 EOT;
 			echo $playlistSong->getTitle();
-echo <<<EOT
+			echo <<<EOT
 				</span>
 				<span class="trackArtist">
 EOT;
 			echo $songArtist->getName();
-echo <<<EOT
+			echo <<<EOT
 				</span>
 			</div>
 			<div class="trackOptions">
@@ -62,7 +62,7 @@ echo <<<EOT
 				<span class="duration">
 EOT;
 			echo $playlistSong->getDuration();
-echo <<<EOT
+			echo <<<EOT
 				</span>
 			</div>
 		</li>
@@ -70,10 +70,10 @@ EOT;
 			$i++;
 		}
 		?>
-<script >
-	var tempSongIds = '<?php echo json_encode($songIdArray);?>';
-	tempPlaylist = JSON.parse(tempSongIds);
-</script>
+		<script>
+			var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+			tempPlaylist = JSON.parse(tempSongIds);
+		</script>
 	</ul>
 </div>
 <h1 class="pageHeadingBig">You Might Also Like</h1>

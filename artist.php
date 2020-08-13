@@ -1,13 +1,13 @@
 <?php
 include 'includes/includedFiles.php';
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $artistId = $_GET['id'];
-}else {
+} else {
     header("Location: index.php");
 }
 
-$artist = new Artist($con, $artistId);
+$artist = new Artist($db, $artistId);
 ?>
 
 <div class="entityInfo borderBottom">
@@ -27,7 +27,7 @@ $artist = new Artist($con, $artistId);
     <h2>SONGS</h2>
     <ul class="tracklist">
         <?php
-            $songIdArray = $artist->getSongIds();
+        $songIdArray = $artist->getSongIds();
 
         $i = 1;
         foreach ($songIdArray as $songId) {
@@ -36,7 +36,7 @@ $artist = new Artist($con, $artistId);
                 break;
             }
 
-            $albumSong = new Song($con, $songId);
+            $albumSong = new Song($db, $songId);
             $albumArtist = $albumSong->getArtist();
 
             echo <<<EOT
@@ -73,32 +73,32 @@ EOT;
             </div>
         <   /li>
 EOT;
-        $i++;
+            $i++;
         }
         ?>
-<script >
-    var tempSongIds = '<?php echo json_encode($songIdArray);?>';
-    tempPlaylist = JSON.parse(tempSongIds);
-</script>
+        <script>
+            var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+            tempPlaylist = JSON.parse(tempSongIds);
+        </script>
     </ul>
 </div>
 <div class="gridViewContainer">
     <h2>ALBUMS</h2>
     <?php
-$albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE artist='$artistId'");
+    $albumQuery = mysqli_query($db, "SELECT * FROM albums WHERE artist='$artistId'");
 
-while ($row = mysqli_fetch_array($albumQuery)) {
-    echo "<div class='gridViewItem'>
+    while ($row = mysqli_fetch_array($albumQuery)) {
+        echo "<div class='gridViewItem'>
         <span role='link' tabindex='0' onclick='openPage(\"album.php?id="
-        . $row['id'] .
-        "\")'>
+            . $row['id'] .
+            "\")'>
             <img src='"
-        . $row['artworkPath'] .
-        "'><div class='gridViewInfo'>"
-        . $row['title'] .
-        "</div>
+            . $row['artworkPath'] .
+            "'><div class='gridViewInfo'>"
+            . $row['title'] .
+            "</div>
         </span>
         </div>";
-}
-?>
+    }
+    ?>
 </div>

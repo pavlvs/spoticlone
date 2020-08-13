@@ -4,20 +4,21 @@ include "includes/includedFiles.php";
 <h1 class="pageHeadingBig">You Might Also Like</h1>
 <div class="gridViewContainer">
 	<?php
-$albumQuery = mysqli_query($con, "SELECT * FROM albums ORDER BY rand() LIMIT 10");
+	$sql = "SELECT *
+			FROM albums
+			ORDER BY rand()
+			LIMIT 10";
 
-while ($row = mysqli_fetch_array($albumQuery)) {
-	echo "<div class='gridViewItem'>
-		<span role='link' tabindex='0' onclick='openPage(\"album.php?id="
-		. $row['id'] .
-		"\")'>
-			<img src='"
-		. $row['artworkPath'] .
-		"'><div class='gridViewInfo'>"
-		. $row['title'] .
-		"</div>
-		</span>
-		</div>";
-}
-?>
+	$albums = mysqli_query($db, $sql);
+	?>
+	<?php while ($album = mysqli_fetch_assoc($albums)) : ?>
+		<div class="gridViewItem">
+			<span role="link" tabindex="0" onclick="openPage('album.php?id='.<?= $album['id'] ?>)">
+				<img src="<?= $album['artworkPath'] ?>" alt="">
+				<div class="gridViewInfo">
+					<?= $album['title'] ?>
+				</div>
+			</span>
+		</div>
+	<?php endwhile; ?>
 </div>

@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Artist
  */
-class Song {
-	private $con;
+class Song
+{
+	private $db;
 	private $id;
 	private $mysqliData;
 	private $title;
@@ -13,10 +15,11 @@ class Song {
 	private $duration;
 	private $path;
 
-	public function __construct($con, $id) {
-		$this->con = $con;
+	public function __construct($db, $id)
+	{
+		$this->db = $db;
 		$this->id = $id;
-		$query = mysqli_query($this->con, "SELECT * FROM songs WHERE id='$this->id'");
+		$query = mysqli_query($this->db, "SELECT * FROM songs WHERE id='$this->id'");
 		$this->mysqliData = mysqli_fetch_array($query);
 		$this->title = $this->mysqliData['title'];
 		$this->artistId = $this->mysqliData['artist'];
@@ -25,37 +28,43 @@ class Song {
 		$this->duration = $this->mysqliData['duration'];
 		$this->path = $this->mysqliData['path'];
 	}
-	public function getMysqliData() {
+	public function getMysqliData()
+	{
 		return $this->mysqliData;
 	}
 
-	public function getId() {
+	public function getId()
+	{
 		return $this->id;
 	}
 
-	public function getTitle() {
+	public function getTitle()
+	{
 		return $this->title;
 	}
 
-	public function getArtist() {
-		return new Artist($this->con, $this->artistId);
+	public function getArtist()
+	{
+		return new Artist($this->db, $this->artistId);
 	}
 
-	public function getAlbum() {
-		return new Album($this->con, $this->albumId);
+	public function getAlbum()
+	{
+		return new Album($this->db, $this->albumId);
 	}
 
-	public function getGenre() {
+	public function getGenre()
+	{
 		return $this->genre;
 	}
 
-	public function getDuration() {
+	public function getDuration()
+	{
 		return $this->duration;
 	}
 
-	public function getPath() {
+	public function getPath()
+	{
 		return $this->path;
 	}
-
 }
-?>

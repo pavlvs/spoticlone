@@ -1,25 +1,41 @@
 <?php
+
 /**
  *
  */
-class Account {
+class Account
+{
 	private $errorArray;
-	private $con;
-	public function __construct($con) {
+	private $db;
+	public function __construct()
+	{
 		$this->errorArray = array();
-		$this->con = $con;
+		$this->db = new Database();
 	}
-	public function login($un, $pw) {
+	public function login($un, $pw)
+	{
 		$pw = md5($pw);
-		$loginQuery = mysqli_query($this->con, "SELECT username, password FROM users WHERE username = '$un' AND password = '$pw'");
-		if (mysqli_num_rows($loginQuery) == 1) {
+		$sql = "SELECT username, `password`
+				FROM `users`
+				WHERE `username` = :username
+				AND `password` = :password";
+
+		$this->db->query($sql);
+
+		$this->db->bind('username', $un);
+		$this->db->bind('password', $pw);
+
+		$row = $this->db->single();
+
+		if ($row) {
 			return true;
 		} else {
 			array_push($this->errorArray, Constants::$loginFailed);
 			return false;
 		}
 	}
-	public function register($un, $fn, $ln, $em1, $em2, $pw1, $pw2) {
+	public function register($un, $fn, $ln, $em1, $em2, $pw1, $pw2)
+	{
 
 		$this->validateUsername($un);
 		$this->validateFirstName($fn);
@@ -34,34 +50,38 @@ class Account {
 		}
 	}
 
-	public function getError($error) {
+	public function getError($error)
+	{
 		if (!in_array($error, $this->errorArray)) {
 			$error = "";
 		}
 		return "<span class='errorMessage'>$error</span>";
 	}
-	private function insertUserDetails($un, $fn, $ln, $em, $pw) {
+	private function insertUserDetails($un, $fn, $ln, $em, $pw)
+	{
 		$encryptedPw = md5($pw);
 		$profilePic = "assets/images/profile-pics/avatar.jpg";
 		$date = date("Y-m-d");
 
 		$query = "INSERT INTO users VALUES('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')";
-		$result = mysqli_query($this->con, $query);
+		$result = mysqli_query($this->db, $query);
 		return $result;
 	}
-	private function validateUsername($un) {
+	private function validateUsername($un)
+	{
 		if (strlen($un) > 25 || strlen($un) < 5) {
 			array_push($this->errorArray, Constants::$usernameCharacters);
 			return;
 		}
 
-		$checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users where username = '$un");
+		$checkUsernameQuery = mysqli_query($this->db, "SELECT username FROM users where username = '$un");
 		if (mysqli_num_rows($checkUsernameQuery) != 0) {
 			array_push($this->errorArray, Constants::$usernameExists);
 			return;
 		}
 	}
-	private function validateFirstName($fn) {
+	private function validateFirstName($fn)
+	{
 		# code...
 		if (strlen($fn) > 25 || strlen($fn) < 2) {
 			// do not register
@@ -69,7 +89,8 @@ class Account {
 			return;
 		}
 	}
-	private function validateLastName($ln) {
+	private function validateLastName($ln)
+	{
 		# code...
 		if (strlen($ln) > 25 || strlen($ln) < 2) {
 			// do not register
@@ -77,7 +98,8 @@ class Account {
 			return;
 		}
 	}
-	private function validateEmails($em1, $em2) {
+	private function validateEmails($em1, $em2)
+	{
 		# code...
 		if ($em1 != $em2) {
 			// do not register
@@ -89,12 +111,13 @@ class Account {
 			array_push($this->errorArray, Constants::$invalidEmail);
 			return;
 		}
-		$checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users where email='$em1'");
+		$checkEmailQuery = mysqli_query($this->db, "SELECT email FROM users where email='$em1'");
 		if (mysqli_num_rows($checkEmailQuery) != 0) {
 			array_push($this->errorArray, Constants::$emailTaken);
 		}
 	}
-	private function validatePasswords($pw1, $pw2) {
+	private function validatePasswords($pw1, $pw2)
+	{
 		if ($pw1 != $pw2) {
 			// do not register
 			array_push($this->errorArray, Constants::$passwordsDoNotMatch);
@@ -112,4 +135,3 @@ class Account {
 		}
 	}
 }
-?>

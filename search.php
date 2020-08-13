@@ -1,7 +1,7 @@
 <?php
 include 'includes/includedFiles.php';
 
-if(isset($_GET['term'])){
+if (isset($_GET['term'])) {
     $term = urldecode($_GET['term']);
 } else {
     $term = "";
@@ -15,12 +15,12 @@ if(isset($_GET['term'])){
 
 <script type="text/javascript">
     $('.searchInput').focus();
-    $(function(){
+    $(function() {
 
-        $('.searchInput').keyup(function () {
+        $('.searchInput').keyup(function() {
             clearTimeout(timer());
 
-            timer = setTimeout(function () {
+            timer = setTimeout(function() {
                 var val = $('.searchInput').val();
                 openPage("search.php?term=" + val);
             }, 2000);
@@ -30,26 +30,26 @@ if(isset($_GET['term'])){
 
 <?php if ($term == "") {
     exit();
-}?>
+} ?>
 
 <div class="tracklistContainer borderBottom">
     <h2>SONGS</h2>
     <ul class="tracklist">
         <?php
-            $songsQuery = mysqli_query($con, "SELECT id FROM songs WHERE title LIKE '$term%'");
-            if (mysqli_num_rows($songsQuery) == 0) {
-                echo "<span class='noResults'>No songs found matching \"" . $term ."\"</span>";
-            }
-            $songIdArray = array();
+        $songsQuery = mysqli_query($db, "SELECT id FROM songs WHERE title LIKE '$term%'");
+        if (mysqli_num_rows($songsQuery) == 0) {
+            echo "<span class='noResults'>No songs found matching \"" . $term . "\"</span>";
+        }
+        $songIdArray = array();
 
         $i = 1;
-    while ($row = mysqli_fetch_array($songsQuery)) {
+        while ($row = mysqli_fetch_array($songsQuery)) {
 
             if ($i > 15) {
                 break;
             }
             array_push($songIdArray, $row['id']);
-            $albumSong = new Song($con, $row['id']);
+            $albumSong = new Song($db, $row['id']);
             $albumArtist = $albumSong->getArtist();
 
             echo <<<EOT
@@ -86,13 +86,13 @@ EOT;
             </div>
         <   /li>
 EOT;
-        $i++;
+            $i++;
         }
         ?>
-<script >
-    var tempSongIds = '<?php echo json_encode($songIdArray);?>';
-    tempPlaylist = JSON.parse(tempSongIds);
-</script>
+        <script>
+            var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+            tempPlaylist = JSON.parse(tempSongIds);
+        </script>
     </ul>
 </div>
 
@@ -100,48 +100,48 @@ EOT;
     <h2>ARTISTS</h2>
 
     <?php
-        $artistsQuery = mysqli_query($con, "SELECT id FROM artists WHERE name LIKE '$term%' LIMIT 10");
+    $artistsQuery = mysqli_query($db, "SELECT id FROM artists WHERE name LIKE '$term%' LIMIT 10");
 
-        if (mysqli_num_rows($artistsQuery) == 0) {
-            echo "<span class='noResults'>No artists found matching \"" . $term ."\"</span>";
-        }
+    if (mysqli_num_rows($artistsQuery) == 0) {
+        echo "<span class='noResults'>No artists found matching \"" . $term . "\"</span>";
+    }
 
-        while ($row = mysqli_fetch_array($artistsQuery)) {
-            $artistFound = new Artist($con, $row['id']);
+    while ($row = mysqli_fetch_array($artistsQuery)) {
+        $artistFound = new Artist($db, $row['id']);
 
-            echo "<div class='searchResultsRow'>
+        echo "<div class='searchResultsRow'>
                     <div class='artistName'>
                         <span class='' role='link' tabindex='0' onclick='openPage(\"artist.php?id=" . $artistFound->getId() . "\")'>"
-                            . $artistFound->getName() .
-                        "</span>
+            . $artistFound->getName() .
+            "</span>
                     </div>
                 </div>";
-        }
+    }
     ?>
 </div>
 
 <div class="gridViewContainer">
     <h2>ALBUMS</h2>
     <?php
-$albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE title LIKE '$term%' LIMIT 10");
+    $albumQuery = mysqli_query($db, "SELECT * FROM albums WHERE title LIKE '$term%' LIMIT 10");
 
     if (mysqli_num_rows($albumQuery) == 0) {
-        echo "<span class='noResults'>No album found matching \"" . $term ."\"</span>";
+        echo "<span class='noResults'>No album found matching \"" . $term . "\"</span>";
     }
 
 
-while ($row = mysqli_fetch_array($albumQuery)) {
-    echo "<div class='gridViewItem'>
+    while ($row = mysqli_fetch_array($albumQuery)) {
+        echo "<div class='gridViewItem'>
         <span role='link' tabindex='0' onclick='openPage(\"album.php?id="
-        . $row['id'] .
-        "\")'>
+            . $row['id'] .
+            "\")'>
             <img src='"
-        . $row['artworkPath'] .
-        "'><div class='gridViewInfo'>"
-        . $row['title'] .
-        "</div>
+            . $row['artworkPath'] .
+            "'><div class='gridViewInfo'>"
+            . $row['title'] .
+            "</div>
         </span>
         </div>";
-}
-?>
+    }
+    ?>
 </div>
