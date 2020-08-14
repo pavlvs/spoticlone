@@ -4,7 +4,7 @@
 
     <?php foreach ($albums as $album) : ?>
         <div class="gridViewItem">
-            <span role="link" tabindex="0" onclick="openPage('album.php?id='.<?= $album->id ?>)">
+            <span role="link" tabindex="0" class="albumLink" data-link="<?= BASE_URI ?>/templates/album.php?id=<?= $album->id ?>">
                 <img src="<?= $album->artworkPath ?>" alt="">
                 <div class="gridViewInfo">
                     <?= $album->title ?>

@@ -10,18 +10,22 @@ class Playlist
     private $name;
     private $owner;
 
-    public function __construct($db, $data)
+    public function __construct($data)
     {
+        $this->db = new Database();
 
         if (!is_array($data)) {
-            //dat is an id string
-            $query = mysqli_query($db, "SELECT * FROM playlists WHERE id='$data'");
-            $data = mysqli_fetch_array($query);
+            //data is an id string
+            $sql = "SELECT *
+                    FROM playlists
+                    WHERE id=':data";
+            $this->db->query($sql);
+            $this->db->bind(':data', $data);
+            $data = $this->db->single();
         }
-        $this->db = $db;
-        $this->id = $data['id'];
-        $this->name = $data['name'];
-        $this->owner = $data['owner'];
+        $this->id = $data->id;
+        $this->name = $data->name;
+        $this->owner = $data->owner;
     }
 
     public function getId()
@@ -40,16 +44,27 @@ class Playlist
 
     public function getNumberOfSongs()
     { # code...
-        $query = mysqli_query($this->db, "SELECT songId FROM playlistsongs WHERE playlistId='$this->id'");
-        return mysqli_num_rows($query);
+        $sql = "SELECT songId
+                FROM playlistsongs
+                WHERE playlistId='$this->id'";
+
+        $this->db->query($sql);
+        $this->db->resultset();
+        return $this->db->rowCount();
     }
 
     public function getSongIds()
     {
-        $query = mysqli_query($this->db, "SELECT songId FROM playlistsongs WHERE playlistId='$this->id' ORDER BY playlistOrder ASC");
-        $array = array();
-        while ($row = mysqli_fetch_array($query)) {
-            array_push($array, $row['songId']);
+        $sql = "SELECT songId
+                FROM playlistsongs
+                WHERE playlistId='$this->id'
+                ORDER BY playlistOrder ASC";
+
+        $this->db->query($sql);
+        $songIds = $this->db->resultset();
+        $array = [];
+        foreach ($songIds as $songId) {
+            array_push($array, $songId);
         }
         return $array;
     }

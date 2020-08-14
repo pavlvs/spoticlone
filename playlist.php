@@ -17,9 +17,9 @@ $owner = new User($db, $playlist->getOwner());
 		</div>
 	</div>
 	<div class="rightSection">
-		<h2><?php echo $playlist->getName(); ?></h2>
-		<p>By <?php echo $playlist->getOwner(); ?></p>
-		<p><?php echo $playlist->getNumberOfSongs(); ?> song(s)</p>
+		<h2><?= $playlist->getName(); ?></h2>
+		<p>By <?= $playlist->getOwner(); ?></p>
+		<p><?= $playlist->getNumberOfSongs(); ?> song(s)</p>
 		<button class="button spoticlone">DELETE PLAYLIST</button>
 	</div>
 </div>
@@ -71,7 +71,7 @@ EOT;
 		}
 		?>
 		<script>
-			var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+			var tempSongIds = '<?= json_encode($songIdArray); ?>';
 			tempPlaylist = JSON.parse(tempSongIds);
 		</script>
 	</ul>

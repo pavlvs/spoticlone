@@ -1,16 +1,13 @@
 <?php
-
-/**
- *
- */
 class Account
 {
-	private $errorArray;
 	private $db;
+	private $validate;
+
 	public function __construct()
 	{
-		$this->errorArray = array();
 		$this->db = new Database();
+		$this->validate = new Validator();
 	}
 	public function login($un, $pw)
 	{
@@ -22,116 +19,61 @@ class Account
 
 		$this->db->query($sql);
 
-		$this->db->bind('username', $un);
-		$this->db->bind('password', $pw);
+		$this->db->bind(':username', $un);
+		$this->db->bind(':password', $pw);
 
 		$row = $this->db->single();
 
 		if ($row) {
 			return true;
 		} else {
-			array_push($this->errorArray, Constants::$loginFailed);
+			$this->validate->loginError();
+
 			return false;
 		}
 	}
 	public function register($un, $fn, $ln, $em1, $em2, $pw1, $pw2)
 	{
+		$this->validate->username($un);
+		$this->validate->firstName($fn);
+		$this->validate->lastName($ln);
+		$this->validate->emails($em1, $em2);
+		$this->validate->passwords($pw1, $pw2);
+		$errors = $this->validate->hasErrors();
 
-		$this->validateUsername($un);
-		$this->validateFirstName($fn);
-		$this->validateLastName($ln);
-		$this->validateEmails($em1, $em2);
-		$this->validatePasswords($pw1, $pw2);
-
-		if (empty($this->errorArray) == true) {
-			return $this->insertUserDetails($un, $fn, $ln, $em1, $pw1);
-		} else {
+		if ($errors > 0) {
 			return false;
+		} else {
+			return $this->insertUserDetails($un, $fn, $ln, $em1, $pw1);
 		}
 	}
 
-	public function getError($error)
-	{
-		if (!in_array($error, $this->errorArray)) {
-			$error = "";
-		}
-		return "<span class='errorMessage'>$error</span>";
-	}
 	private function insertUserDetails($un, $fn, $ln, $em, $pw)
 	{
 		$encryptedPw = md5($pw);
 		$profilePic = "assets/images/profile-pics/avatar.jpg";
 		$date = date("Y-m-d");
 
-		$query = "INSERT INTO users VALUES('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')";
-		$result = mysqli_query($this->db, $query);
-		return $result;
-	}
-	private function validateUsername($un)
-	{
-		if (strlen($un) > 25 || strlen($un) < 5) {
-			array_push($this->errorArray, Constants::$usernameCharacters);
-			return;
-		}
+		$sql = "INSERT INTO users (username, firstName, lastName, email, `password`, signUpDate, profilePic)
+				VALUES(:un, :fn, :ln, :em, :encryptedPw, :date, :profilePic)";
+		$this->db->query($sql);
+		$this->db->bind(':un', $un);
+		$this->db->bind(':fn', $fn);
+		$this->db->bind(':ln', $ln);
+		$this->db->bind(':em', $em);
+		$this->db->bind(':pw', $encryptedPw);
+		$this->db->bind(':profilePic', $profilePic);
+		$this->db->bind(':date', $date);
 
-		$checkUsernameQuery = mysqli_query($this->db, "SELECT username FROM users where username = '$un");
-		if (mysqli_num_rows($checkUsernameQuery) != 0) {
-			array_push($this->errorArray, Constants::$usernameExists);
-			return;
+		if ($this->db->execute()) {
+			return true;
+		} else {
+			return false;
 		}
 	}
-	private function validateFirstName($fn)
+
+	public function showError($error)
 	{
-		# code...
-		if (strlen($fn) > 25 || strlen($fn) < 2) {
-			// do not register
-			array_push($this->errorArray, Constants::$firstNameCharacters);
-			return;
-		}
-	}
-	private function validateLastName($ln)
-	{
-		# code...
-		if (strlen($ln) > 25 || strlen($ln) < 2) {
-			// do not register
-			array_push($this->errorArray, Constants::$lastNameCharacters);
-			return;
-		}
-	}
-	private function validateEmails($em1, $em2)
-	{
-		# code...
-		if ($em1 != $em2) {
-			// do not register
-			array_push($this->errorArray, Constants::$emailsDoNotMatch);
-			return;
-		}
-		if (!filter_var($em1, FILTER_VALIDATE_EMAIL)) {
-			// do not register
-			array_push($this->errorArray, Constants::$invalidEmail);
-			return;
-		}
-		$checkEmailQuery = mysqli_query($this->db, "SELECT email FROM users where email='$em1'");
-		if (mysqli_num_rows($checkEmailQuery) != 0) {
-			array_push($this->errorArray, Constants::$emailTaken);
-		}
-	}
-	private function validatePasswords($pw1, $pw2)
-	{
-		if ($pw1 != $pw2) {
-			// do not register
-			array_push($this->errorArray, Constants::$passwordsDoNotMatch);
-			return;
-		}
-		if (preg_match('/[^A-Za-z0-9]/', $pw1)) {
-			array_push($this->errorArray, Constants::$passwordsCharacters);
-			return;
-			# code...
-		}
-		if (strlen($pw1) > 30 || strlen($pw1) < 5) {
-			// do not register
-			array_push($this->errorArray, Constants::$passwordLength);
-			return;
-		}
+		$this->validate->getError($error);
 	}
 }

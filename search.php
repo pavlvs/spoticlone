@@ -10,7 +10,7 @@ if (isset($_GET['term'])) {
 
 <div class="searchContainer">
     <h4>Search for an album, artist or song</h4>
-    <input type="text" name="" value="<?php echo $term; ?>" placeholder="Start typing..." class="searchInput" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
+    <input type="text" name="" value="<?= $term; ?>" placeholder="Start typing..." class="searchInput" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
 </div>
 
 <script type="text/javascript">
@@ -90,7 +90,7 @@ EOT;
         }
         ?>
         <script>
-            var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+            var tempSongIds = '<?= json_encode($songIdArray); ?>';
             tempPlaylist = JSON.parse(tempSongIds);
         </script>
     </ul>

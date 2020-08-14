@@ -15,18 +15,22 @@ class Song
 	private $duration;
 	private $path;
 
-	public function __construct($db, $id)
+	public function __construct($id)
 	{
-		$this->db = $db;
+		$this->db = new Database();
 		$this->id = $id;
-		$query = mysqli_query($this->db, "SELECT * FROM songs WHERE id='$this->id'");
-		$this->mysqliData = mysqli_fetch_array($query);
-		$this->title = $this->mysqliData['title'];
-		$this->artistId = $this->mysqliData['artist'];
-		$this->albumId = $this->mysqliData['album'];
-		$this->genre = $this->mysqliData['genre'];
-		$this->duration = $this->mysqliData['duration'];
-		$this->path = $this->mysqliData['path'];
+		$sql = "SELECT *
+				FROM songs
+				WHERE id='$this->id'";
+
+		$this->db->query($sql);
+		$this->mysqliData = $this->db->resultset();
+		$this->title = $this->mysqliData->title;
+		$this->artistId = $this->mysqliData->artist;
+		$this->albumId = $this->mysqliData->album;
+		$this->genre = $this->mysqliData->genre;
+		$this->duration = $this->mysqliData->duration;
+		$this->path = $this->mysqliData->path;
 	}
 	public function getMysqliData()
 	{
@@ -45,12 +49,12 @@ class Song
 
 	public function getArtist()
 	{
-		return new Artist($this->db, $this->artistId);
+		return new Artist($this->artistId);
 	}
 
 	public function getAlbum()
 	{
-		return new Album($this->db, $this->albumId);
+		return new Album($this->albumId);
 	}
 
 	public function getGenre()

@@ -45,7 +45,7 @@ include "includes/handlers/login-handler.php";
                 <form action="register.php" method="POST" id="loginForm">
                     <h2>Login to your account</h2>
                     <p>
-                        <?php echo $account->getError(Constants::$loginFailed); ?>
+                        <?= $account->getError(Constants::$loginFailed); ?>
                         <label for="loginUsername">Username</label>
                         <input type="text" name="loginUsername" id="loginUsername" value="<?php sticky("loginUsername"); ?>" placeholder="e.g. bartSimpson" required>
                     </p>
@@ -62,22 +62,22 @@ include "includes/handlers/login-handler.php";
                 <form action="register.php" method="POST" id="registerForm">
                     <h2>Create your free account</h2>
                     <p>
-                        <?php echo $account->getError(Constants::$usernameCharacters); ?>
+                        <?= $account->getError(Constants::$usernameCharacters); ?>
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" value="<?php sticky("username"); ?>" placeholder="e.g. bartSimpson" required>
                     </p>
                     <p>
-                        <?php echo $account->getError(Constants::$firstNameCharacters); ?>
+                        <?= $account->getError(Constants::$firstNameCharacters); ?>
                         <label for="firstName">First name</label>
                         <input type="text" name="firstName" id="firstName" value="<?php sticky("firstName"); ?>" placeholder="e.g. Bart" required>
                     </p>
                     <p>
-                        <?php echo $account->getError(Constants::$lastNameCharacters); ?>
+                        <?= $account->getError(Constants::$lastNameCharacters); ?>
                         <label for="lastName">Last name</label>
                         <input type="text" name="lastName" id="lastName" value="<?php sticky("lastName"); ?>" placeholder="e.g. Simpson" required>
                     </p>
                     <p>
-                        <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
+                        <?= $account->getError(Constants::$emailsDoNotMatch); ?>
                         <?php $account->getError(Constants::$invalidEmail); ?>
                         <label for="email1">Email</label>
                         <input type="email" name="email1" id="email1" value="<?php sticky("email1"); ?>" placeholder="e.g. bart@simpson.com" required>
@@ -87,9 +87,9 @@ include "includes/handlers/login-handler.php";
                         <input type="email" name="email2" id="email2" value="<?php sticky("email2"); ?>" placeholder="e.g. bart@simpson.com" required>
                     </p>
                     <p>
-                        <?php echo $account->getError(Constants::$passwordLength); ?>
-                        <?php echo $account->getError(Constants::$passwordsDoNotMatch); ?>
-                        <?php echo $account->getError(Constants::$passwordsCharacters); ?>
+                        <?= $account->getError(Constants::$passwordLength); ?>
+                        <?= $account->getError(Constants::$passwordsDoNotMatch); ?>
+                        <?= $account->getError(Constants::$passwordsCharacters); ?>
                         <label for="password1">Password</label>
                         <input type="password" name="password1" id="password1" value="" placeholder="Your password" required>
                     </p>

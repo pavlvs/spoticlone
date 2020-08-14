@@ -14,7 +14,7 @@ $artist = new Artist($db, $artistId);
     <div class="centerSection">
         <div class="artistInfo">
             <h1 class="artistName">
-                <?php echo $artist->getName(); ?>
+                <?= $artist->getName(); ?>
             </h1>
             <div class="headerButtons">
                 <button class="button spoticlone" onclick="playFirstSong()">PLAY</button>
@@ -77,7 +77,7 @@ EOT;
         }
         ?>
         <script>
-            var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+            var tempSongIds = '<?= json_encode($songIdArray); ?>';
             tempPlaylist = JSON.parse(tempSongIds);
         </script>
     </ul>

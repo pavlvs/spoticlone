@@ -1,16 +1,12 @@
 <?php
-
-/**
- * Artist
- */
 class Artist
 {
 	private $db;
 	private $id;
 
-	public function __construct($db, $id)
+	public function __construct($id)
 	{
-		$this->db = $db;
+		$this->db = new Database();
 		$this->id = $id;
 	}
 
@@ -21,18 +17,28 @@ class Artist
 
 	public function getName()
 	{
-		$artistQuery = mysqli_query($this->db, "SELECT name FROM artists WHERE id='$this->id'");
-		$artist = mysqli_fetch_array($artistQuery);
-		return $artist['name'];
+		$sql = "SELECT name
+				FROM artists
+				WHERE id='$this->id'";
+
+		$this->db->query($sql);
+		$artist = $this->db->single();
+		return $artist->name;
 	}
 
 	public function getSongIds()
 	{
-		$query = mysqli_query($this->db, "SELECT id FROM songs WHERE artist='$this->id' ORDER BY plays ASC");
+		$sql = "SELECT id
+				FROM songs
+				WHERE artist='$this->id'
+				ORDER BY plays ASC";
 
-		$array = array();
-		while ($row = mysqli_fetch_array($query)) {
-			array_push($array, $row['id']);
+		$this->db->query($sql);
+		$songIds = $this->db->resultset();
+
+		$array = [];
+		foreach ($songIds as $songId) {
+			array_push($array, $songId);
 		}
 
 		return $array;

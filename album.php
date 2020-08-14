@@ -6,19 +6,19 @@ if (isset($_GET['id'])) {
 	header("Location: index.php");
 }
 
-$album = new Album($db, $albumId);
+$album = new Album($albumId);
 
 $artist = $album->getArtist();
 
 ?>
 <div class="entityInfo">
 	<div class="leftSection">
-		<img src="<?php echo $album->getArtwork(); ?>" alt="">
+		<img src="<?= $album->getArtwork(); ?>" alt="">
 	</div>
 	<div class="rightSection">
-		<h2><?php echo $album->getTitle(); ?></h2>
-		<p>By <?php echo $artist->getName(); ?></p>
-		<p><?php echo $album->getNumberOfSongs(); ?> song(s)</p>
+		<h2><?= $album->getTitle(); ?></h2>
+		<p>By <?= $artist->getName(); ?></p>
+		<p><?= $album->getNumberOfSongs(); ?> song(s)</p>
 	</div>
 </div>
 
@@ -69,7 +69,7 @@ EOT;
 		}
 		?>
 		<script>
-			var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+			var tempSongIds = '<?= json_encode($songIdArray); ?>';
 			tempPlaylist = JSON.parse(tempSongIds);
 		</script>
 	</ul>
