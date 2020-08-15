@@ -34,7 +34,7 @@ $artist = $album->getArtist();
 			echo <<<EOT
 <li class="tracklistRow">
 	<div class="trackCount">
-		<img class="play" src="assets/images/icons/play-white.png" onclick="setTrack('
+		<img class="play" src="<?= IMG_FOLDER ?>icons/play-white.png" onclick="setTrack('
 EOT;
 			echo $albumSong->getId();
 			echo <<<EOT
@@ -54,7 +54,7 @@ EOT;
 		</span>
 	</div>
 	<div class="trackOptions">
-		<img class="optionsButton" src="assets/images/icons/more.png">
+		<img class="optionsButton" src="<?= IMG_FOLDER ?>icons/more.png">
 	</div>
 	<div class="trackDuration">
 		<span class="duration">

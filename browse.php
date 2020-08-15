@@ -13,7 +13,7 @@ include "includes/includedFiles.php";
 	?>
 	<?php while ($album = mysqli_fetch_assoc($albums)) : ?>
 		<div class="gridViewItem">
-			<span role="link" tabindex="0" onclick="openPage('album.php?id='.<?= $album['id'] ?>)">
+			<span role="link" tabindex="0" data-link="album.php?id='.<?= $album['id'] ?>)">
 				<img src="<?= $album['artworkPath'] ?>" alt="">
 				<div class="gridViewInfo">
 					<?= $album['title'] ?>

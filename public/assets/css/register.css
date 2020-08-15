@@ -1,177 +1,174 @@
 html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #background {
-  display: table;
-
-  width: 100%;
-  height: 100%;
-
-  background-color: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../images/dolce.jpg");
-  background-position: center;
-  background-size: cover;
+    background-color: #000;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('../images/dolce.jpg');
+    background-position: center;
+    background-size: cover;
+    display: table;
+    height: 100%;
+    width: 100%;
 }
 
 #loginContainer * {
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  font-weight: normal;
-  line-height: 1em;
-
-  box-sizing: border-box;
-
-  color: #fff;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-weight: normal;
+    line-height: 1em;
 }
 
 #loginContainer {
-  position: relative;
-
-  width: 80%;
-  max-width: 1024px;
-  margin: 0 auto;
+    margin: 0 auto;
+    max-width: 1024px;
+    position: relative;
+    width: 80%;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #111 inset !important;
+  -webkit-transition-delay: background-color 99999s;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
 ::-webkit-input-placeholder {
-  /* WebKit, Blink, Edge */
-  color: #fff;
+    /* WebKit, Blink, Edge */
+    color: #fff;
 }
 
 :-moz-placeholder {
-  opacity: 1;
-  /* Mozilla Firefox 4 to 18 */
-  color: #fff;
+    /* Mozilla Firefox 4 to 18 */
+    color: #fff;
+    opacity: 1;
 }
 
 ::-moz-placeholder {
-  opacity: 1;
-  /* Mozilla Firefox 19+ */
-  color: #fff;
+    /* Mozilla Firefox 19+ */
+    color: #fff;
+    opacity: 1;
 }
 
 :-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #fff;
+    /* Internet Explorer 10-11 */
+    color: #fff;
 }
 
 ::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #fff;
+    /* Microsoft Edge */
+    color: #fff;
 }
 
 ::placeholder {
-  /* Most modern browsers support this now. */
-  color: #fff;
+    /* Most modern browsers support this now. */
+    color: #fff;
 }
 
 #inputContainer {
-  float: left;
-
-  width: 400px;
-  padding: 45px;
-
-  border-right: 1px solid #999;
+    border-right: 1px solid #999;
+    float: left;
+    padding: 45px;
+    width: 400px;
 }
 
 #inputContainer h2 {
-  text-align: center;
+    text-align: center;
 }
 
-#inputContainer input[type="text"],
-#inputContainer input[type="email"],
-#inputContainer input[type="password"] {
-  line-height: 27px;
+#inputContainer input[type='text'],
+#inputContainer input[type='email'],
+#inputContainer input[type='password'] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    display: block;
+    height: 27px;
+    line-height: 27px;
+    width: 100%;
+}
 
-  display: block;
-
-  width: 100%;
-  height: 27px;
-
-  border: none;
-  border-bottom: 1px solid #fff;
-  background-color: transparent;
+.inputField, .inputField input{
+  background-color: transparent !important;
 }
 
 #inputContainer label {
-  font-size: 13px;
-
-  margin-top: 15px;
-
-  color: #a8a8a8;
+    color: #a8a8a8;
+    font-size: 13px;
+    margin-top: 15px;
 }
 
 #inputContainer .errorMessage {
-  color: #00ff36;
-  font-size: 12px;
-  margin-bottom: 5px;
-  display: block;
+    color: #00ff36;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
 }
 
 #inputContainer button {
-  font-size: 14px;
-
-  display: block;
-
-  width: 100%;
-  height: 41px;
-  margin: 20px auto;
-
-  letter-spacing: 1px;
-
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 250px;
-  background-color: transparent;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 250px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    height: 41px;
+    letter-spacing: 1px;
+    margin: 20px auto;
+    width: 100%;
 }
 
 #inputContainer button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .hasAccountText span {
-  font-weight: bold;
-  font-size: 12px;
-  font-weight: bold;
-
-  cursor: pointer;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    font-weight: bold;
 }
 
 .hasAccountText {
-  text-align: center;
+    text-align: center;
 }
 
 #registerForm,
 #loginForm {
-  display: none;
+    display: none;
 }
 
 #loginText {
-  display: table-cell;
-
-  padding: 45px;
+    display: table-cell;
+    padding: 45px;
 }
 
 #loginText h1 {
-  color: #07ff3c;
-  font-size: 60px;
-  font-weight: bold;
+    color: #07ff3c;
+    font-size: 60px;
+    font-weight: bold;
 }
 
 #loginText h2 {
-  margin: 35px 0;
+    margin: 35px 0;
 }
 
 #loginText ul {
-  padding: 0;
+    padding: 0;
 }
 
 #loginText li {
-  font-size: 20px;
-  list-style: none;
-  padding: 3px 30px;
-  background: url(../images/icons/checkmark.png) no-repeat;
+    background: url(../images/icons/checkmark.png) no-repeat;
+    font-size: 20px;
+    list-style: none;
+    padding: 3px 30px;
 }

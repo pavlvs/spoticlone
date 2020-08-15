@@ -1,12 +1,10 @@
 <?php
-require_once '../core/init.php';
+include '../templates/includes/includedFiles.php';
 
 $database = new Database();
-// $account = new Account();
-
 $account = new Account();
-require_once '../helpers/form_helpers.php';
 
+require_once '../helpers/form_helpers.php';
 
 $title = 'Welcome to Spoticlone';
 
@@ -34,11 +32,13 @@ switch ($action) {
         $template = new Template('../templates/browse.php');
         $template->albums = $albums;
         break;
-    case 'test':
-        $template = new Template('../templates/test.php');
+    case 'logout':
+        $account->logout();
+        $template = new Template('../templates/register.html.php');
         break;
     default:
         # code...
         break;
 }
 echo $template;
+include __DIR__ . '/../templates/includes/footer.php';

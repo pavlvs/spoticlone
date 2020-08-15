@@ -1,10 +1,12 @@
 <?php
+ob_start();
+
 session_start();
+
+
 
 require_once '../config/config.php';
 require_once '../helpers/system_helpers.php';
-
-
 
 // require_once 'helpers/system_helper.php';
 // require_once 'helpers/format_helper.php';

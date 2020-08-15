@@ -32,6 +32,18 @@ class Account
 			return false;
 		}
 	}
+
+	public function logout()
+	{
+		unset($_SESSION['userLoggedIn']);
+		//unset($_SESSION['userId']);
+		//unset($_SESSION['username']);
+		//unset($_SESSION['name']);
+
+		header('Location: index.php?action=register');
+		session_destroy();
+	}
+
 	public function register($un, $fn, $ln, $em1, $em2, $pw1, $pw2)
 	{
 		$this->validate->username($un);
@@ -51,7 +63,7 @@ class Account
 	private function insertUserDetails($un, $fn, $ln, $em, $pw)
 	{
 		$encryptedPw = md5($pw);
-		$profilePic = "assets/images/profile-pics/avatar.jpg";
+		$profilePic = "<?= IMG_FOLDER ?>profile-pics/avatar.jpg";
 		$date = date("Y-m-d");
 
 		$sql = "INSERT INTO users (username, firstName, lastName, email, `password`, signUpDate, profilePic)

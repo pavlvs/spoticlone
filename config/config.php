@@ -8,3 +8,6 @@ define('SITE_TITLE', 'Welcome to Slotify!');
 
 //Paths
 define('BASE_URI', 'http://' . $_SERVER["SERVER_NAME"] . '/sandbox/spoticlone/');
+define('IMG_FOLDER', BASE_URI . 'public/assets/images/');
+
+$timezone = date_default_timezone_set("Europe/London");

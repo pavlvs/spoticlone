@@ -90,15 +90,15 @@ body {
     text-align: center;
 }
 
+.playbackBar {
+    display: flex;
+}
+
 .progressBar {
     cursor: pointer;
     display: inline-flex;
     height: 12px;
     width: 100%;
-}
-
-.playbackBar {
-    display: flex;
 }
 
 .progressBarBg {
@@ -127,7 +127,7 @@ body {
     max-width: 57px;
 }
 
-.trackInfo {
+#nowPlayingLeft .trackInfo {
     display: table;
 }
 
@@ -280,12 +280,12 @@ body {
 }
 
 .entityInfo .rightSection {
-    float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 70%;
+    float: left;
     padding: 5px 10px 5px 40px;
+    width: 70%;
 }
 
 .rightSection h2 {
@@ -380,10 +380,10 @@ body {
 }
 
 .button {
-    color: #fff;
     background-color: transparent;
-    border-radius: 500px;
     border: 2px solid #fff;
+    border-radius: 500px;
+    color: #fff;
     cursor: pointer;
     font-weight: 500;
     letter-spacing: 2;

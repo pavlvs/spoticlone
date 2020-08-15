@@ -45,7 +45,7 @@ if (isset($_POST['registerButton'])) {
     } else {
         $success = $account->register($data['username'], $data['firstName'], $data['lastName'], $data['email1'], $data['email2'], $data['password1'], $data['password2']);
         if ($success) {
-            $_SESSION['userLoggedIn'] = $username;
+            $_SESSION['userLoggedIn'] = $data['username'];
             header("Location:index.php?action=browse");
             exit;
         }

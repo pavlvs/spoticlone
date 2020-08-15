@@ -39,11 +39,11 @@
                     <p>
                         <?php $account->showError(Constants::$loginFailed) ?>
                         <label for="loginUsername">Username</label>
-                        <input type="text" name="loginUsername" id="loginUsername" value="<?php stickyInput("loginUsername"); ?>" placeholder="e.g. bartSimpson" required>
+                        <input type="text" name="loginUsername" id="loginUsername" class="inputField" value="<?php stickyInput("loginUsername"); ?>" placeholder="e.g. bartSimpson" required>
                     </p>
                     <p>
                         <label for="loginPassword">Password</label>
-                        <input type="password" name="loginPassword" id="loginPassword" value="" placeholder="Your password" required>
+                        <input type="password" name="loginPassword" id="loginPassword" class="inputField" value="" placeholder="Your password" required>
                     </p>
                     <button type="submit" name="loginButton">LOG IN</button>
 
