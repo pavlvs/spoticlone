@@ -1,6 +1,16 @@
 <?php
 require_once '../core/init.php';
 
+//get the albumId if passed by GET or by POST
+$albumId = filter_input(INPUT_POST, 'albumId');
+if ($albumId == NULL) {
+    $albumId = filter_input(INPUT_GET, 'albumId');
+    if ($albumId == NULL) {
+        $albumId = '';
+    }
+}
+
+//get the action passed by GET or by POST if none default to register
 $action = strtolower(filter_input(INPUT_POST, 'action'));
 if ($action == NULL) {
     $action = strtolower(filter_input(INPUT_GET, 'action'));
@@ -8,32 +18,19 @@ if ($action == NULL) {
         $action = 'register';
     }
 }
-
-if ($action == 'register') {
-    require_once '../core/init.php';
-    $database = new Database();
-    $account = new Account();
-    require_once '../helpers/form_helpers.php';
-
-    $template = new Template('../templates/register.html.php');
-    $template->account = $account;
-    echo $template;
-    exit;
-}
-require_once '../helpers/form_helpers.php';
-
+// initialize objects
 $database = new Database();
 $account = new Account();
+$album = new Album($albumId);
 
 switch ($action) {
+    case 'register':
+        require_once '../helpers/form_helpers.php';
+        $template = new Template('../templates/register.html.php');
+        $template->account = $account;
+        break;
     case 'browse':
-        $sql = "SELECT *
-			FROM albums
-			ORDER BY rand()
-            LIMIT 10";
-
-        $database->query($sql);
-        $albums = $database->resultset();
+        $albums = $album->getRandomAlbums(10);
         $template = new Template('../templates/browse.php');
         $template->albums = $albums;
         break;

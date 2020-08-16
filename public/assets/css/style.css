@@ -17,6 +17,7 @@ body {
     letter-spacing: 1px;
 }
 
+
 /* Now Playing Bar */
 
 #nowPlayingBarContainer {
@@ -162,6 +163,7 @@ body {
     width: 100%;
 }
 
+
 /* NavBar Container */
 
 #navBarContainer {
@@ -220,6 +222,7 @@ body {
 .nowPlayingRight {
     margin-top: 15px;
 }
+
 
 /* Main View */
 

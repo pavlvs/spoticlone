@@ -16,17 +16,29 @@ class Album
 	{
 		$this->db = new Database();
 		$this->id = $id;
-		$sql = "SELECT * FROM albums WHERE id='$this->id'";
+		$sql = "SELECT *
+				FROM albums
+				WHERE id='$this->id'";
 		$this->db->query($sql);
-		$album = $this->db->execute();
-		$this->title = $album->title;
-		$this->artistId = $album->artist;
-		$this->genre = $album->genre;
-		$this->artworkPath = $album->artworkPath;
+		$album = $this->db->single();
+		if ($album) {
+			$this->title = $album->title;
+			$this->artistId = $album->artist;
+			$this->genre = $album->genre;
+			$this->artworkPath = $album->artworkPath;
+		}
 	}
 
-	public function getRandomAlbums(){
+	public function getRandomAlbums($number)
+	{
+		$sql = "SELECT *
+			FROM `albums`
+			ORDER BY rand()
+            LIMIT $number";
 
+		$this->db->query($sql);
+		$albums = $this->db->resultset();
+		return $albums;
 	}
 
 	public function getTitle()
@@ -60,11 +72,11 @@ class Album
 	public function getSongIds()
 	{
 		$sql = "SELECT id FROM songs WHERE album='$this->id' ORDER BY albumOrder ASC";
-			$this->db->query($sql);
-			$this->db->execute();
-			$albums = $this->db->resultset();
+		$this->db->query($sql);
+		$this->db->execute();
+		$albums = $this->db->resultset();
 		$array = [];
-		foreach ($albums as $album)) {
+		foreach ($albums as $album) {
 			array_push($array, $album->id);
 		}
 		return $array;
