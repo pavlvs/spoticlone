@@ -27,6 +27,7 @@ class Template
 
     public function __toString()
     {
+
         extract($this->vars);
         chdir(dirname($this->template));
         ob_start();

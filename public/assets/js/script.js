@@ -1,4 +1,5 @@
 $(function () {
+    $('#mainContent').load(encodeURI(window.location.href));
     var currentPlaylist = [];
     var shuffledPlaylist = [];
     var tempPlaylist = [];
@@ -10,18 +11,16 @@ $(function () {
     var userLoggedIn;
     var timer;
 
-    $('.albumLink').click(function () {
+    $(document).on('click', '.albumLink', function () {
         console.log($(this).attr('data-link'));
         openPage($(this).attr('data-link'));
     });
 
     $('#homeLink').click(function () {
-        console.log($(this).attr('data-link'));
         openPage($(this).attr('data-link'));
     });
 
     $('#browseLink').click(function () {
-        console.log($(this).attr('data-link'));
         openPage($(this).attr('data-link'));
     });
 
@@ -54,7 +53,6 @@ $(function () {
     });
 
     function openPage(url) {
-        console.log('openPage is alive!');
         if (timer != null) {
             clearTimeout(timer);
         }
@@ -63,7 +61,9 @@ $(function () {
             url = url + '?';
         }
         var encodedUrl = encodeURI(url + '&userLoggedIn=' + userLoggedIn);
+        console.log('happening');
         $('#mainContent').load(encodedUrl);
+
         $('body').scrollTop(0);
         history.pushState(null, null, url);
     }

@@ -1,5 +1,4 @@
 <?php
-require_once '../core/init.php';
 
 if (isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
@@ -17,6 +16,8 @@ if (isset($_SESSION['userLoggedIn'])) {
     <title>Spoticlone</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="assets/js/jquery-3.4.1.js"></script>
+    <script src="assets/js/script.js"></script>
 
 </head>
 

@@ -1,6 +1,6 @@
 <div id="navBarContainer">
     <nav class="navBar">
-        <span id="homeLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=browse" class="logo">
+        <span id="homeLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=browse&ajax=true" class="logo">
             <img src="<?= IMG_FOLDER ?>icons/logo.png" alt="logo">
         </span>
         <div class="group">
@@ -12,7 +12,7 @@
         </div>
         <div class="group">
             <div class="navItem">
-                <span id="browseLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=browse" class="navItemLink">Browse</span>
+                <span id="browseLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=browse&ajax=true" class="navItemLink">Browse</span>
             </div>
             <div class="navItem">
                 <span id="musicLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>templates/your_music.php" class="navItemLink">Your Music</span>
