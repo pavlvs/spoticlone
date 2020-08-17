@@ -1,3 +1,23 @@
+<?php
+$jsonArrayOfSongs = jsonArrayOfSongs();
+
+?>
+<script>
+    $(function() {
+        currentPlaylist = <?= $jsonArrayOfSongs ?>;
+        audioElement = new Audio();
+        setTrack(currentPlaylist[0], currentPlaylist, false);
+        //audioElement.play();
+    });
+
+    function setTrack(trackId, newPlaylist, play) {
+        audioElement.setTrack('assets/music/bensound-acousticbreeze.mp3');
+        if (play) {
+            audioElement.play();
+        }
+    }
+</script>
+
 <div id="nowPlayingBarContainer">
     <div id="nowPlayingBar">
 

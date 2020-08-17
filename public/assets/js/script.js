@@ -1,9 +1,7 @@
 $(function () {
     $('#mainContent').load(encodeURI(window.location.href));
-    var currentPlaylist = [];
     var shuffledPlaylist = [];
     var tempPlaylist = [];
-    var audioElement;
     var mouseDown = false;
     var currentIndex = 0;
     var repeat = false;
@@ -38,14 +36,6 @@ $(function () {
 
     $('#previousBtn').click(function () {
         prevSong();
-    });
-
-    $('#playBtn').click(function () {
-        playSong();
-    });
-
-    $('#pauseBtn').click(function () {
-        pauseSong();
     });
 
     $('#nextBtn').click(function () {
@@ -360,7 +350,6 @@ function shuffleArray(a) {
         }
     );
 }
- */
 function playSong() {
     if (audioElement.audio.currentTime == 0) {
         $.post('includes/handlers/ajax/updatePlays.php', {
@@ -377,4 +366,4 @@ function pauseSong() {
     $('.controlButton.play').show();
     $('.controlButton.pause').hide();
     audioElement.pause();
-}
+} */
