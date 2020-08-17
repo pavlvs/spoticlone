@@ -4,12 +4,7 @@ ob_start();
 session_start();
 
 
-
-require_once '../config/config.php';
-require_once '../helpers/system_helpers.php';
-
 // require_once 'helpers/format_helper.php';
-// require_once 'helpers/db_helper.php';
 
 function autoloader($className)
 {
@@ -21,3 +16,7 @@ function autoloader($className)
 }
 
 spl_autoload_register('autoloader');
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../helpers/system_helpers.php';
+
+require_once __DIR__ . '/../helpers/db_helpers.php';

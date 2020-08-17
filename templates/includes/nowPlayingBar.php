@@ -11,7 +11,12 @@ $jsonArrayOfSongs = jsonArrayOfSongs();
     });
 
     function setTrack(trackId, newPlaylist, play) {
-        audioElement.setTrack('assets/music/bensound-acousticbreeze.mp3');
+        $.post("<?= AJAX_DIR ?>getSongJson.php", {
+                songId: 1
+            },
+            function(data) {
+                console.log(data);
+            });
         if (play) {
             audioElement.play();
         }

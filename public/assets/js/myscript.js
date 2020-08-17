@@ -32,14 +32,14 @@ $(function () {
     // event listeners
 
     $('#playBtn').click(function () {
-        $('.controlButton.play').hide();
-        $('.controlButton.pause').show();
+        $('#playBtn').hide();
+        $('#pauseBtn').show();
         playSong();
     });
 
     $('#pauseBtn').click(function () {
-        $('.controlButton.play').show();
-        $('.controlButton.pause').hide();
+        $('#playBtn').show();
+        $('#pauseBtn').hide();
         pauseSong();
     });
 });
