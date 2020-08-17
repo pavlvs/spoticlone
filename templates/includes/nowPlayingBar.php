@@ -1,28 +1,3 @@
-<?php
-$jsonArrayOfSongs = jsonArrayOfSongs();
-
-?>
-<script>
-    $(function() {
-        currentPlaylist = <?= $jsonArrayOfSongs ?>;
-        audioElement = new Audio();
-        setTrack(currentPlaylist[0], currentPlaylist, false);
-        //audioElement.play();
-    });
-
-    function setTrack(trackId, newPlaylist, play) {
-        $.post("<?= AJAX_DIR ?>getSongJson.php", {
-                songId: 1
-            },
-            function(data) {
-                console.log(data);
-            });
-        if (play) {
-            audioElement.play();
-        }
-    }
-</script>
-
 <div id="nowPlayingBarContainer">
     <div id="nowPlayingBar">
 

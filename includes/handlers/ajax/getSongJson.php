@@ -1,11 +1,9 @@
 <?php
-    include '../../config.php';
-    if(isset($_POST['songId'])){
-        $songId = $_POST['songId'];
+require_once __DIR__ . '/../../../core/init.php';
 
-        $query = mysqli_query($db, "SELECT * FROM songs WHERE id='$songId'");
 
-        $resultArray = mysqli_fetch_array($query);
-
-        echo json_encode($resultArray);
-    }
+if (isset($_POST['songId'])) {
+    $songId = $_POST['songId'];
+    $song = getSong($songId);
+    echo $song;
+}

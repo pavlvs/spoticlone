@@ -7,6 +7,7 @@
 </div>
 <?php include __DIR__ . '/nowPlayingBar.php' ?>
 <!--End of mainContainer -->
+<script src="assets/js/nowplaying.js"></script>
 </body>
 
 </html>
