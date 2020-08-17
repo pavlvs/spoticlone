@@ -18,7 +18,7 @@ include_once "includes/includedFiles.php";
     <ul class="tracklist">
         <?php
         $songIdArray = $album->getSongIds();
-        $i = 1;
+        $i = 0;
         ?>
         <?php foreach ($songIdArray as $songId) :
             $albumSong = new Song($songId);
@@ -40,7 +40,6 @@ include_once "includes/includedFiles.php";
                         <?= $albumArtist->getName() ?>
                     </span>
                 </div>
-
                 <div class="trackOptions">
                     <img class="optionsButton" src="<?= IMG_FOLDER ?>icons/more.png?>">
                 </div>

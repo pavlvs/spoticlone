@@ -1,8 +1,4 @@
 <?php
-
-/**
- * Artist
- */
 class Song
 {
 	private $db;
