@@ -18,7 +18,7 @@ function autoloader($className)
 
     $file = __DIR__ . '/../classes/' . $fileName;
 
-    include $file;
+    include_once $file;
 }
 
 spl_autoload_register('autoloader');

@@ -48,7 +48,7 @@ class Album
 
 	public function getArtist()
 	{
-		return new Artist($this->db, $this->artistId);
+		return new Artist($this->artistId);
 	}
 
 	public function getGenre()
@@ -63,7 +63,9 @@ class Album
 
 	public function getNumberOfSongs()
 	{
-		$sql = "SELECT id FROM songs WHERE album='$this->id'";
+		$sql = "SELECT id
+				FROM songs
+				WHERE album='$this->id'";
 		$this->db->query($sql);
 		$this->db->execute();
 		return $this->db->rowCount();
@@ -71,9 +73,11 @@ class Album
 
 	public function getSongIds()
 	{
-		$sql = "SELECT id FROM songs WHERE album='$this->id' ORDER BY albumOrder ASC";
+		$sql = "SELECT id
+				FROM songs
+				WHERE album='$this->id'
+				ORDER BY albumOrder ASC";
 		$this->db->query($sql);
-		$this->db->execute();
 		$albums = $this->db->resultset();
 		$array = [];
 		foreach ($albums as $album) {

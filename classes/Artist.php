@@ -19,7 +19,7 @@ class Artist
 	{
 		$sql = "SELECT name
 				FROM artists
-				WHERE id='$this->id'";
+				WHERE id=$this->id";
 
 		$this->db->query($sql);
 		$artist = $this->db->single();

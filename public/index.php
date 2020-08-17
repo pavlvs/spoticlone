@@ -22,6 +22,7 @@ if ($action == NULL) {
 $database = new Database();
 $account = new Account();
 $album = new Album($albumId);
+//$song = new Song($id);
 
 switch ($action) {
     case 'register':
@@ -34,12 +35,18 @@ switch ($action) {
         $template = new Template('../templates/browse.php');
         $template->albums = $albums;
         break;
-    case 'showAlbum':
-        $template = new Template('../templates/album.php');
+    case 'showalbum':
+        $artist = $album->getArtist();
+        $template = new Template('../templates/singleAlbum.php');
+        $template->album = $album;
+        $template->artist = $artist;
         break;
     case 'logout':
         $account->logout();
-        $template = new Template('../templates/register.html.php');
+        //$template = new Template('../templates/register.html.php');
+        break;
+    case 'search':
+        $template = new Template('../templates/search.php');
         break;
     default:
         # code...

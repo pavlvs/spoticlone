@@ -7,7 +7,7 @@ class Song
 {
 	private $db;
 	private $id;
-	private $mysqliData;
+	private $data;
 	private $title;
 	private $artistId;
 	private $albumId;
@@ -19,22 +19,25 @@ class Song
 	{
 		$this->db = new Database();
 		$this->id = $id;
+		$songId = intval($this->id);
+
 		$sql = "SELECT *
 				FROM songs
-				WHERE id='$this->id'";
+				WHERE id=:id";
 
 		$this->db->query($sql);
-		$this->mysqliData = $this->db->resultset();
-		$this->title = $this->mysqliData->title;
-		$this->artistId = $this->mysqliData->artist;
-		$this->albumId = $this->mysqliData->album;
-		$this->genre = $this->mysqliData->genre;
-		$this->duration = $this->mysqliData->duration;
-		$this->path = $this->mysqliData->path;
+		$this->db->bind(':id', $songId);
+		$this->data = $this->db->single();
+		$this->title = $this->getData()->title;
+		$this->artistId = $this->getData()->artist;
+		$this->albumId = $this->getData()->album;
+		$this->genre = $this->getData()->genre;
+		$this->duration = $this->getData()->duration;
+		$this->path = $this->getData()->path;
 	}
-	public function getMysqliData()
+	public function getData()
 	{
-		return $this->mysqliData;
+		return $this->data;
 	}
 
 	public function getId()

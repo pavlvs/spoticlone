@@ -24,6 +24,10 @@ $(function () {
         openPage($(this).attr('data-link'));
     });
 
+    $('.navItemLink').click(function () {
+        openPage($(this).attr('data-link'));
+    });
+
     $('#shuffleBtn').click(function () {
         setShuffle();
     });
