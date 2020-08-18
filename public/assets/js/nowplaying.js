@@ -21,9 +21,10 @@ $(function () {
         }
     }
 
-    currentPlaylist = setPlaylist();
     audioElement = new Audio();
+    let audio = audioElement.audio;
 
+    currentPlaylist = setPlaylist();
     track = parseInt(currentPlaylist[0]);
     setTrack(track, currentPlaylist, false);
     //audioElement.play();
@@ -52,6 +53,11 @@ $(function () {
         $('#playBtn').show();
         $('#pauseBtn').hide();
         pauseSong();
+    });
+
+    audio.addEventListener('canplay', function () {
+        let duration = formatTime(audio.duration);
+        $('#timeRemaining').text(duration);
     });
 
     // ============== FUNCTIONS ==============
@@ -95,7 +101,6 @@ $(function () {
                     }
                 );
                 audioElement.setTrack(track);
-                console.log(audioElement.currentlyPlaying.id);
             }
         );
         if (play) {
@@ -120,7 +125,7 @@ $(function () {
     }
 
     function playSong() {
-        if (audioElement.audio.currentTime == 0) {
+        if (audio.currentTime == 0) {
             let songId = parseInt(audioElement.currentlyPlaying.id);
             $.post(
                 '../includes/handlers/ajax/updatePlays.php',
@@ -156,4 +161,13 @@ $(function () {
         history.pushState(null, null, url);
     }
     //playSong();
+
+    function formatTime(seconds) {
+        seconds = Math.round(seconds);
+        minutes = Math.floor(seconds / 60);
+        seconds = seconds - minutes * 60;
+        extrazero = seconds < 10 ? '0' : '';
+        timeFormatted = minutes + ':' + extrazero + seconds;
+        return timeFormatted;
+    }
 });
