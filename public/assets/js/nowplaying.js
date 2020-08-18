@@ -1,5 +1,6 @@
 $(function () {
     $('#mainContent').load(encodeURI(window.location.href));
+    let mousedown = false;
     class Audio {
         audio;
         currentlyPlaying;
@@ -18,6 +19,10 @@ $(function () {
 
         pause() {
             this.audio.pause();
+        }
+
+        setTime(seconds) {
+            this.audio.currentTime = seconds;
         }
     }
 
@@ -53,6 +58,26 @@ $(function () {
         $('#playBtn').show();
         $('#pauseBtn').hide();
         pauseSong();
+    });
+
+    $('.playbackBar .progressBar').mousedown(function () {
+        mousedown = true;
+    });
+
+    $('.playbackBar .progressBar').mousemove(function (e) {
+        if (mousedown) {
+            //set time of song depending on mouse position
+            timeFromOffset(e, this);
+        }
+    });
+
+    $('.playbackBar .progressBar').mouseup(function (e) {
+        //set time of song depending on mouse position
+        timeFromOffset(e, this);
+    });
+
+    $(document).mouseup(function () {
+        mousedown = false;
     });
 
     audio.addEventListener('canplay', function () {
@@ -184,5 +209,11 @@ $(function () {
         );
         let progress = (audio.currentTime / audio.duration) * 100;
         $('#progress').css('width', progress + '%');
+    }
+
+    function timeFromOffset(mouse, progressBar) {
+        let percentage = (mouse.offsetX / $(progressBar).width()) * 100;
+        let seconds = audio.duration * (percentage / 100);
+        audioElement.setTime(seconds);
     }
 });
