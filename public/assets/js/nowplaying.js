@@ -4,7 +4,40 @@ $(function () {
     track = parseInt(currentPlaylist[0]);
     setTrack(track, currentPlaylist, false);
     //audioElement.play();
+    playSong(track);
+    // event listeners
+
+    $('#playBtn').click(function () {
+        $('#playBtn').hide();
+        $('#pauseBtn').show();
+        playSong();
+    });
+
+    $('#pauseBtn').click(function () {
+        $('#playBtn').show();
+        $('#pauseBtn').hide();
+        pauseSong();
+    });
 });
+
+class Audio {
+    audio;
+    constructor() {
+        this.audio = document.createElement('audio');
+    }
+
+    setTrack(src) {
+        this.audio.src = src;
+    }
+
+    play() {
+        this.audio.play();
+    }
+
+    pause() {
+        this.audio.pause();
+    }
+}
 
 function setTrack(trackId, newPlaylist, play) {
     $.post(
@@ -45,7 +78,6 @@ function setTrack(trackId, newPlaylist, play) {
             );
             $('#artistName').text(track.artist);
             audioElement.setTrack(track.path);
-            audioElement.play();
         }
     );
     if (play) {
@@ -64,4 +96,25 @@ function setPlaylist() {
     });
     $.ajaxSetup({ async: true }); //return to default setting
     return returnData;
+}
+
+function playSong(trackId) {
+    if (audioElement.audio.currentTime == 0) {
+        console.log('we are on track: ' + trackId);
+        $.post(
+            '../includes/handlers/ajax/updatePlays.php',
+            {
+                songId: trackId,
+            },
+            function (data) {}
+        );
+        console.log('update count');
+    } else {
+        console.log("don't update count");
+    }
+    audioElement.play();
+}
+
+function pauseSong() {
+    audioElement.pause();
 }

@@ -18,7 +18,7 @@ if (isset($_SESSION['userLoggedIn'])) {
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <script src="assets/js/jquery-3.4.1.js"></script>
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/myscript.js"></script>
+    <!-- <script src="assets/js/myscript.js"></script> -->
 
 </head>
 

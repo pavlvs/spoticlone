@@ -1,35 +1,38 @@
-let currentPlaylist = [];
-let audioElement;
+// let currentPlaylist = [];
+// let audioElement;
 
-class Audio {
-    audio;
-    constructor() {
-        this.audio = document.createElement('audio');
-    }
+// class Audio {
+//     audio;
+//     constructor() {
+//         this.audio = document.createElement('audio');
+//     }
 
-    setTrack(src) {
-        this.audio.src = src;
-    }
+//     setTrack(src) {
+//         this.audio.src = src;
+//     }
 
-    play() {
-        this.audio.play();
-    }
+//     play() {
+//         this.audio.play();
+//     }
 
-    pause() {
-        this.audio.pause();
-    }
-}
+//     pause() {
+//         this.audio.pause();
+//     }
+// }
 
-function playSong() {
-    audioElement.play();
-}
+// function playSong() {
+//     if (audioElement.audio.currentTime == 0) {
+//         console.log('update count');
+//     }
+//     audioElement.play();
+// }
 
-function pauseSong() {
-    audioElement.pause();
-}
+// function pauseSong() {
+//     audioElement.pause();
+// }
 
 $(function () {
-    // event listeners
+    /* // event listeners
 
     $('#playBtn').click(function () {
         $('#playBtn').hide();
@@ -41,5 +44,5 @@ $(function () {
         $('#playBtn').show();
         $('#pauseBtn').hide();
         pauseSong();
-    });
+    }); */
 });
