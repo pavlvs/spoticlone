@@ -50,7 +50,7 @@
                     </span>
                     <div class="progressBar">
                         <div class="progressBarBg">
-                            <div class="progress">
+                            <div id="progress" class="progress">
                             </div>
                         </div>
                     </div>

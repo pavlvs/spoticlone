@@ -60,6 +60,12 @@ $(function () {
         $('#timeRemaining').text(duration);
     });
 
+    audio.addEventListener('timeupdate', function () {
+        if (audio.duration) {
+            updateTimeProgressbar(audio);
+        }
+    });
+
     // ============== FUNCTIONS ==============
 
     //ajax call to get and set song track info
@@ -169,5 +175,14 @@ $(function () {
         extrazero = seconds < 10 ? '0' : '';
         timeFormatted = minutes + ':' + extrazero + seconds;
         return timeFormatted;
+    }
+
+    function updateTimeProgressbar(audio) {
+        $('#currentTime').text(formatTime(audio.currentTime));
+        $('#timeRemaining').text(
+            formatTime(audio.duration - audio.currentTime)
+        );
+        let progress = (audio.currentTime / audio.duration) * 100;
+        $('#progress').css('width', progress + '%');
     }
 });
