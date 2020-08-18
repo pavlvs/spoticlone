@@ -50,7 +50,7 @@
                     </span>
                     <div class="progressBar">
                         <div class="progressBarBg">
-                            <div id="progress" class="progress">
+                            <div id="progressTime" class="progress">
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                 </button>
                 <div class="progressBar">
                     <div class="progressBarBg">
-                        <div class="progress">
+                        <div id="progressVolume" class="progress">
                         </div>
                     </div>
                 </div>

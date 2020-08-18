@@ -32,9 +32,17 @@ $(function () {
     currentPlaylist = setPlaylist();
     track = parseInt(currentPlaylist[0]);
     setTrack(track, currentPlaylist, false);
+    updateTimeProgressbar(audio);
     //audioElement.play();
 
     // ==============  EVENT LISTENERS ==============
+
+    $('#nowPlayingBarContainer').on(
+        'mousedown touchstart mousemove touchmove',
+        function (e) {
+            e.preventDefault();
+        }
+    );
 
     $('#homeLink').click(function () {
         openPage($(this).attr('data-link'));
@@ -76,6 +84,26 @@ $(function () {
         timeFromOffset(e, this);
     });
 
+    $('.volumeBar .progressBar').mousedown(function () {
+        mousedown = true;
+    });
+
+    $('.volumeBar .progressBar').mousemove(function (e) {
+        if (mousedown) {
+            let percentage = e.offsetX / $(this).width();
+            if (percentage >= 0 && percentage <= 1) {
+                audio.volume = percentage;
+            }
+        }
+    });
+
+    $('.volumeBar .progressBar').mouseup(function (e) {
+        let percentage = e.offsetX / $(this).width();
+        if (percentage >= 0 && percentage <= 1) {
+            audio.volume = percentage;
+        }
+    });
+
     $(document).mouseup(function () {
         mousedown = false;
     });
@@ -89,6 +117,10 @@ $(function () {
         if (audio.duration) {
             updateTimeProgressbar(audio);
         }
+    });
+
+    audio.addEventListener('volumechange', function () {
+        updateVolumeBar(audio);
     });
 
     // ============== FUNCTIONS ==============
@@ -208,7 +240,12 @@ $(function () {
             formatTime(audio.duration - audio.currentTime)
         );
         let progress = (audio.currentTime / audio.duration) * 100;
-        $('#progress').css('width', progress + '%');
+        $('#progressTime').css('width', progress + '%');
+    }
+
+    function updateVolumeBar(audio) {
+        let volume = audio.volume * 100;
+        $('#progressVolume').css('width', volume + '%');
     }
 
     function timeFromOffset(mouse, progressBar) {
