@@ -1,22 +1,49 @@
 $(function () {
     currentPlaylist = setPlaylist();
-    console.log(currentPlaylist);
     audioElement = new Audio();
     track = parseInt(currentPlaylist[0]);
-    console.log(track);
     setTrack(track, currentPlaylist, false);
     //audioElement.play();
 });
 
 function setTrack(trackId, newPlaylist, play) {
     $.post(
-        '../includes/handlers/ajax/getSongJson.php',
+        '../includes/handlers/ajax/getRecordJson.php',
         {
-            songId: trackId,
+            table: 'songs',
+            id: trackId,
         },
         function (data) {
-            console.log(data);
             let track = JSON.parse(data);
+            $('#trackName').text(track.title);
+
+            $.post(
+                '../includes/handlers/ajax/getRecordJson.php',
+                {
+                    table: 'artists',
+                    id: track.artist,
+                },
+                function (data) {
+                    let artist = JSON.parse(data);
+                    $('#artistName').text(artist.name);
+                }
+            );
+            $.post(
+                '../includes/handlers/ajax/getRecordJson.php',
+                {
+                    table: 'albums',
+                    id: track.album,
+                },
+                function (data) {
+                    let album = JSON.parse(data);
+                    const artworkDir = '../public/';
+                    $('#albumArtwork').attr(
+                        'src',
+                        artworkDir + album.artworkPath
+                    );
+                }
+            );
+            $('#artistName').text(track.artist);
             audioElement.setTrack(track.path);
             audioElement.play();
         }
@@ -33,7 +60,6 @@ function setPlaylist() {
         data
     ) {
         data = JSON.parse(data);
-        console.log(data);
         returnData = data;
     });
     $.ajaxSetup({ async: true }); //return to default setting

@@ -1,15 +1,14 @@
 <?php
-
-function getSong($id)
+function getSingleRecord($table, $id)
 {
     $db = new Database();
 
     $sql = "SELECT *
-        FROM songs
+        FROM $table
         WHERE id = :id";
     $db->query($sql);
     $db->bind(':id', $id);
-    $song = $db->single();
-    $song = (array) $song;
-    return json_encode($song);
+    $record = $db->single();
+    $record = (array) $record;
+    return json_encode($record);
 }
