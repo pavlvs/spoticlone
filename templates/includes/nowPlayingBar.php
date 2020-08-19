@@ -40,7 +40,7 @@
                     </button>
 
                     <button id="repeatBtn" class="controlButton repeat" title="repeat button">
-                        <img src="<?= IMG_FOLDER ?>icons/repeat.png" alt="repeat button">
+                        <img src="<?= IMG_FOLDER ?>icons/repeat.png" alt="repeat button" id="#repeatIcon">
                     </button>
                 </div>
 

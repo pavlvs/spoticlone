@@ -1,7 +1,10 @@
+let repeat = false;
 $(function () {
     $('#mainContent').load(encodeURI(window.location.href));
+    let iconsFolder = 'assets/images/icons/';
     let mousedown = false;
     let currentIndex = 0;
+
     class Audio {
         audio;
         currentlyPlaying;
@@ -70,6 +73,10 @@ $(function () {
         nextSong();
     });
 
+    $('#repeatBtn').click(function () {
+        setRepeat();
+    });
+
     $('.playbackBar .progressBar').mousedown(function () {
         mousedown = true;
     });
@@ -129,6 +136,9 @@ $(function () {
 
     //ajax call to get and set song track info
     function setTrack(trackId, newPlaylist, play) {
+        currentIndex = currentPlaylist.indexOf(trackId);
+        pauseSong();
+
         $.post(
             '../includes/handlers/ajax/getRecordJson.php',
             {
@@ -215,6 +225,11 @@ $(function () {
     }
 
     function nextSong() {
+        if (repeat) {
+            audioElement.setTime(0);
+            playSong();
+            return;
+        }
         if (currentIndex == currentPlaylist.length - 1) {
             currentIndex = 0;
         } else {
@@ -223,6 +238,12 @@ $(function () {
 
         let trackToPlay = currentPlaylist[currentIndex];
         setTrack(trackToPlay, currentPlaylist, true);
+    }
+
+    function setRepeat() {
+        repeat = !repeat;
+        let repeatIcon = repeat ? 'repeat-active.png' : 'repeat.png';
+        $('#repeatBtn img').attr('src', iconsFolder + repeatIcon);
     }
 
     function openPage(url) {
