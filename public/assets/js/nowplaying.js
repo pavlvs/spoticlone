@@ -1,9 +1,12 @@
 let repeat = false;
+let shuffle = false;
 $(function () {
     $('#mainContent').load(encodeURI(window.location.href));
     let iconsFolder = 'assets/images/icons/';
     let mousedown = false;
     let currentIndex = 0;
+    let currentPlaylist = [];
+    let shufflePlaylist = [];
 
     class Audio {
         audio;
@@ -34,9 +37,8 @@ $(function () {
     audioElement = new Audio();
     let audio = audioElement.audio;
 
-    currentPlaylist = setPlaylist();
-    track = parseInt(currentPlaylist[0]);
-    setTrack(track, currentPlaylist, false);
+    let newPlaylist = setPlaylist();
+    setTrack(newPlaylist[0], newPlaylist, false);
     updateTimeProgressbar(audio);
     //audioElement.play();
 
@@ -85,6 +87,9 @@ $(function () {
         setMute();
     });
 
+    $('#shuffleBtn').click(function () {
+        setShuffle();
+    });
     $('.playbackBar .progressBar').mousedown(function () {
         mousedown = true;
     });
@@ -148,7 +153,15 @@ $(function () {
 
     //ajax call to get and set song track info
     function setTrack(trackId, newPlaylist, play) {
-        currentIndex = currentPlaylist.indexOf(trackId);
+        if (newPlaylist != currentPlaylist) {
+            currentPlaylist = newPlaylist;
+            shufflePlaylist = currentPlaylist.slice();
+            shuffleArray(shufflePlaylist);
+        }
+        currentIndex = shuffle
+            ? shufflePlaylist.indexOf(trackId)
+            : currentPlaylist.indexOf(trackId);
+
         pauseSong();
 
         $.post(
@@ -204,7 +217,13 @@ $(function () {
             {},
             function (data) {
                 data = JSON.parse(data);
-                returnData = data;
+                songIds = [];
+                data.forEach((element) => {
+                    element = parseInt(element);
+                    songIds.push(element);
+                });
+
+                returnData = songIds;
             }
         );
         $.ajaxSetup({ async: true }); //return to default setting
@@ -257,7 +276,9 @@ $(function () {
             currentIndex++;
         }
 
-        let trackToPlay = currentPlaylist[currentIndex];
+        let trackToPlay = shuffle
+            ? shufflePlaylist[currentIndex]
+            : currentPlaylist[currentIndex];
         setTrack(trackToPlay, currentPlaylist, true);
     }
 
@@ -274,6 +295,31 @@ $(function () {
             : 'volume.png';
         $('#muteIcon').attr('src', iconsFolder + muteIcon);
     }
+    function setShuffle() {
+        shuffle = !shuffle;
+        let shuffleIcon = shuffle ? 'shuffle-active.png' : 'shuffle.png';
+        $('#shuffleIcon').attr('src', iconsFolder + shuffleIcon);
+
+        if (shuffle) {
+            //radomize playlist
+            shuffleArray(shufflePlaylist);
+            currentIndex = shufflePlaylist.indexOf(
+                audioElement.currentlyPlaying.id
+            );
+        } else {
+            //regular playlist
+            currentIndex = currentPlaylist.indexOf(
+                audioElement.currentlyPlaying.id
+            );
+        }
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
     function openPage(url) {
         if (timer != null) {
@@ -284,7 +330,6 @@ $(function () {
             url = url + '?';
         }
         var encodedUrl = encodeURI(url + '&userLoggedIn=' + userLoggedIn);
-        console.log('happening');
         $('#mainContent').load(encodedUrl);
 
         $('body').scrollTop(0);

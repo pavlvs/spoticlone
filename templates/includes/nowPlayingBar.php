@@ -20,7 +20,7 @@
             <div class="content playerControls">
                 <div class="buttons">
                     <button id="shuffleBtn" class="controlButton shuffle" title="Shuffle button">
-                        <img src="<?= IMG_FOLDER ?>icons/shuffle.png" alt="shuffle button">
+                        <img src="<?= IMG_FOLDER ?>icons/shuffle.png" alt="shuffle button" id="shuffleIcon">
                     </button>
 
                     <button id="previousBtn" class="controlButton previous" title="previous button">
