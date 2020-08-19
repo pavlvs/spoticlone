@@ -7,6 +7,8 @@ $(function () {
     let currentIndex = 0;
     let currentPlaylist = [];
     let shufflePlaylist = [];
+    let timer;
+    let userLoggedIn;
 
     class Audio {
         audio;
@@ -50,6 +52,11 @@ $(function () {
             e.preventDefault();
         }
     );
+
+    $(document).on('click', '.albumLink', function () {
+        console.log($(this).attr('data-link'));
+        openPage($(this).attr('data-link'));
+    });
 
     $('#homeLink').click(function () {
         openPage($(this).attr('data-link'));
