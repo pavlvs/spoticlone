@@ -52,6 +52,14 @@ switch ($action) {
         $playlist = json_encode($album->getSongIds());
         echo $playlist;
         break;
+    case 'userloggedin':
+        if (isset($_SESSION['userLoggedIn'])) {
+            $userLoggedIn = $_SESSION['userLoggedIn'];
+        } else {
+            $userLoggedIn = '';
+        }
+        echo $userLoggedIn;
+        break;
     default:
         # code...
         break;

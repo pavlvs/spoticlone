@@ -1,6 +1,5 @@
 $(function () {
-    $('#mainContent').load(encodeURI(window.location.href), function () {});
-
+    //$('#mainContent').load(encodeURI(window.location.href), function () {});
     const iconsFolder = 'assets/images/icons/';
     let repeat = false;
     let shuffle = false;
@@ -16,6 +15,8 @@ $(function () {
     const albumId = urlParams.get('albumId');
 
     tempPlaylist = setTempPlayList(albumId);
+    userLoggedIn = setUserLoggedIn();
+    loadPage();
 
     class Audio {
         audio;
@@ -355,6 +356,14 @@ $(function () {
         $('body').scrollTop(0);
         history.pushState(null, null, url);
     }
+
+    function loadPage() {
+        url = window.location.href + '&userLoggedIn=' + userLoggedIn;
+        let encodedUrl = encodeURI(url);
+        $('#mainContent').load(encodedUrl);
+        history.pushState(null, null, url);
+    }
+
     //playSong();
 
     function formatTime(seconds) {
@@ -403,6 +412,20 @@ $(function () {
                     songIds.push(element);
                 });
                 returnData = songIds;
+            }
+        );
+        $.ajaxSetup({ async: true }); //return to default setting
+        return returnData;
+    }
+
+    function setUserLoggedIn() {
+        $.ajaxSetup({ async: false }); //execute synchronously
+        var returnData = null;
+        $.post(
+            '/sandbox/spoticlone/public/index.php?action=userloggedin',
+            {},
+            function (data) {
+                returnData = data;
             }
         );
         $.ajaxSetup({ async: true }); //return to default setting
