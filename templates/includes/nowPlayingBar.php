@@ -66,7 +66,7 @@
         <div id="nowPlayingRight">
             <div class="volumeBar">
                 <button id="volumeBtn" class="controlButton volume" title="volume button">
-                    <img src="<?= IMG_FOLDER ?>icons/volume.png" alt="volume button">
+                    <img src="<?= IMG_FOLDER ?>icons/volume.png" alt="volume button" id="muteIcon">
                 </button>
                 <div class="progressBar">
                     <div class="progressBarBg">

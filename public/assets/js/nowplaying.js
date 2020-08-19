@@ -81,6 +81,10 @@ $(function () {
         prevSong();
     });
 
+    $('#muteIcon').click(function () {
+        setMute();
+    });
+
     $('.playbackBar .progressBar').mousedown(function () {
         mousedown = true;
     });
@@ -261,6 +265,14 @@ $(function () {
         repeat = !repeat;
         let repeatIcon = repeat ? 'repeat-active.png' : 'repeat.png';
         $('#repeatBtn img').attr('src', iconsFolder + repeatIcon);
+    }
+
+    function setMute() {
+        audioElement.audio.muted = !audioElement.audio.muted;
+        let muteIcon = audioElement.audio.muted
+            ? 'volume-mute.png'
+            : 'volume.png';
+        $('#muteIcon').attr('src', iconsFolder + muteIcon);
     }
 
     function openPage(url) {
