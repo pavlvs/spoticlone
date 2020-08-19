@@ -1,10 +1,9 @@
-let repeat = false;
-let shuffle = false;
-let foo;
 $(function () {
     $('#mainContent').load(encodeURI(window.location.href), function () {});
 
-    let iconsFolder = 'assets/images/icons/';
+    const iconsFolder = 'assets/images/icons/';
+    let repeat = false;
+    let shuffle = false;
     let mousedown = false;
     let currentIndex = 0;
     let currentPlaylist = [];
@@ -12,12 +11,11 @@ $(function () {
     let tempPlaylist = [];
     let timer;
     let userLoggedIn;
-    const urlParams = new URLSearchParams(window.location.href);
 
+    const urlParams = new URLSearchParams(window.location.href);
     const albumId = urlParams.get('albumId');
 
     tempPlaylist = setTempPlayList(albumId);
-    console.log(tempPlaylist);
 
     class Audio {
         audio;
@@ -51,7 +49,6 @@ $(function () {
     let newPlaylist = setPlaylist();
     setTrack(newPlaylist[0], newPlaylist, false);
     updateTimeProgressbar(audio);
-    //audioElement.play();
 
     // ==============  EVENT LISTENERS ==============
 
@@ -63,7 +60,6 @@ $(function () {
     );
 
     $(document).on('click', '.albumLink', function () {
-        console.log($(this).attr('data-link'));
         openPage($(this).attr('data-link'));
     });
 
@@ -146,6 +142,12 @@ $(function () {
         mousedown = false;
     });
 
+    $(document).on('click', '#songBtn', function () {
+        console.log($(this).attr('data-songid'));
+        songId = $(this).attr('data-songid');
+        setTrack(songId, tempPlaylist, true);
+    });
+
     audio.addEventListener('canplay', function () {
         let duration = formatTime(audio.duration);
         $('#timeRemaining').text(duration);
@@ -224,7 +226,7 @@ $(function () {
         );
     }
 
-    //ajax callto get a random array of 10 songs
+    //ajax callto get a random array of 10 initial songs
     function setPlaylist() {
         $.ajaxSetup({ async: false }); //execute synchronously
         var returnData = null;
@@ -311,6 +313,7 @@ $(function () {
             : 'volume.png';
         $('#muteIcon').attr('src', iconsFolder + muteIcon);
     }
+
     function setShuffle() {
         shuffle = !shuffle;
         let shuffleIcon = shuffle ? 'shuffle-active.png' : 'shuffle.png';
@@ -337,6 +340,7 @@ $(function () {
         }
     }
 
+    // load pages into mainContainer through ajax
     function openPage(url) {
         if (timer != null) {
             clearTimeout(timer);
@@ -382,6 +386,7 @@ $(function () {
         audioElement.setTime(seconds);
     }
 
+    //ajax call to get the song ids for the single album page playlist
     function setTempPlayList(albumId) {
         $.ajaxSetup({ async: false }); //execute synchronously
         var returnData = null;
@@ -397,7 +402,6 @@ $(function () {
                     element = parseInt(element);
                     songIds.push(element);
                 });
-
                 returnData = songIds;
             }
         );

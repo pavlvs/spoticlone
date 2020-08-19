@@ -27,7 +27,7 @@ include_once "includes/includedFiles.php";
         ?>
             <li class="tracklistRow">
                 <div class="trackCount">
-                    <img class="play" src="<?= IMG_FOLDER ?>icons/play-white.png?>" data-songid="<?= $albumSong->getId() ?>" data-tempPlayList="true">
+                    <img class="play" src="<?= IMG_FOLDER ?>icons/play-white.png?>" data-songid="<?= $albumSong->getId() ?>" data-tempPlayList="true" id="songBtn">
                     <span class="trackNumber">
                         <?= $i ?>
                     </span>
