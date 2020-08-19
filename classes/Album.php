@@ -41,6 +41,11 @@ class Album
 		return $albums;
 	}
 
+	public function getId()
+	{
+		return $this->id;
+	}
+
 	public function getTitle()
 	{
 		return $this->title;

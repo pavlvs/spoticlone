@@ -1,14 +1,23 @@
 let repeat = false;
 let shuffle = false;
+let foo;
 $(function () {
-    $('#mainContent').load(encodeURI(window.location.href));
+    $('#mainContent').load(encodeURI(window.location.href), function () {});
+
     let iconsFolder = 'assets/images/icons/';
     let mousedown = false;
     let currentIndex = 0;
     let currentPlaylist = [];
     let shufflePlaylist = [];
+    let tempPlaylist = [];
     let timer;
     let userLoggedIn;
+    const urlParams = new URLSearchParams(window.location.href);
+
+    const albumId = urlParams.get('albumId');
+
+    tempPlaylist = setTempPlayList(albumId);
+    console.log(tempPlaylist);
 
     class Audio {
         audio;
@@ -371,5 +380,28 @@ $(function () {
         let percentage = (mouse.offsetX / $(progressBar).width()) * 100;
         let seconds = audio.duration * (percentage / 100);
         audioElement.setTime(seconds);
+    }
+
+    function setTempPlayList(albumId) {
+        $.ajaxSetup({ async: false }); //execute synchronously
+        var returnData = null;
+        $.post(
+            '/sandbox/spoticlone/public/index.php?action=tempplaylist',
+            {
+                albumId: albumId,
+            },
+            function (data) {
+                data = JSON.parse(data);
+                songIds = [];
+                data.forEach((element) => {
+                    element = parseInt(element);
+                    songIds.push(element);
+                });
+
+                returnData = songIds;
+            }
+        );
+        $.ajaxSetup({ async: true }); //return to default setting
+        return returnData;
     }
 });

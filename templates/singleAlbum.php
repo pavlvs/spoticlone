@@ -6,7 +6,7 @@ include_once "includes/includedFiles.php";
         <img src="<?= $album->getArtwork(); ?>" alt="<?= $album->getTitle(); ?>">
     </div>
     <div class="rightSection">
-        <h2><?= $album->getTitle(); ?></h2>
+        <h2 id="album" data-album="<?= $album->getId() ?>"><?= $album->getTitle(); ?></h2>
         <p role="link" tabindex="0" data-link="artist.php?id=<?= $artist->getId() ?>">
             By <?= $artist->getName(); ?>
         </p>
@@ -50,9 +50,6 @@ include_once "includes/includedFiles.php";
                 </div>
             </li>
         <?php endforeach; ?>
-        <script>
-            var tempSongIds = '<?= json_encode($songIdArray); ?>';
-            tempPlaylist = JSON.parse(tempSongIds);
-        </script>
     </ul>
+</div>
 </div>

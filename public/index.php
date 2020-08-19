@@ -48,9 +48,15 @@ switch ($action) {
     case 'search':
         $template = new Template('../templates/search.php');
         break;
+    case 'tempplaylist':
+        $playlist = json_encode($album->getSongIds());
+        echo $playlist;
+        break;
     default:
         # code...
         break;
 }
-echo $template;
+if (isset($template)) {
+    echo $template;
+}
 exit;
