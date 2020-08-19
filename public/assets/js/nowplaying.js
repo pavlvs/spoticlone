@@ -77,6 +77,10 @@ $(function () {
         setRepeat();
     });
 
+    $('#previousBtn').click(function () {
+        prevSong();
+    });
+
     $('.playbackBar .progressBar').mousedown(function () {
         mousedown = true;
     });
@@ -130,6 +134,10 @@ $(function () {
 
     audio.addEventListener('volumechange', function () {
         updateVolumeBar(audio);
+    });
+
+    audio.addEventListener('ended', function () {
+        nextSong();
     });
 
     // ============== FUNCTIONS ==============
@@ -222,6 +230,15 @@ $(function () {
         $('#playBtn').show();
         $('#pauseBtn').hide();
         audioElement.pause();
+    }
+
+    function prevSong() {
+        if (audioElement.audio.currentTime >= 3 || currentIndex == 0) {
+            audioElement.setTime(0);
+        } else {
+            currentIndex--;
+            setTrack(currentPlaylist[currentIndex], currentPlaylist, true);
+        }
     }
 
     function nextSong() {
