@@ -1,6 +1,7 @@
 $(function () {
     $('#mainContent').load(encodeURI(window.location.href));
     let mousedown = false;
+    let currentIndex = 0;
     class Audio {
         audio;
         currentlyPlaying;
@@ -11,6 +12,7 @@ $(function () {
         setTrack(track) {
             this.currentlyPlaying = track;
             this.audio.src = track.path;
+            //this.play();
         }
 
         play() {
@@ -57,15 +59,15 @@ $(function () {
     });
 
     $('#playBtn').click(function () {
-        $('#playBtn').hide();
-        $('#pauseBtn').show();
         playSong();
     });
 
     $('#pauseBtn').click(function () {
-        $('#playBtn').show();
-        $('#pauseBtn').hide();
         pauseSong();
+    });
+
+    $('#nextBtn').click(function () {
+        nextSong();
     });
 
     $('.playbackBar .progressBar').mousedown(function () {
@@ -164,11 +166,11 @@ $(function () {
                     }
                 );
                 audioElement.setTrack(track);
+                if (play) {
+                    playSong();
+                }
             }
         );
-        if (play) {
-            audioElement.play();
-        }
     }
 
     //ajax callto get a random array of 10 songs
@@ -201,11 +203,26 @@ $(function () {
         } else {
             console.log("don't update count");
         }
+        $('#playBtn').hide();
+        $('#pauseBtn').show();
         audioElement.play();
     }
 
     function pauseSong() {
+        $('#playBtn').show();
+        $('#pauseBtn').hide();
         audioElement.pause();
+    }
+
+    function nextSong() {
+        if (currentIndex == currentPlaylist.length - 1) {
+            currentIndex = 0;
+        } else {
+            currentIndex++;
+        }
+
+        let trackToPlay = currentPlaylist[currentIndex];
+        setTrack(trackToPlay, currentPlaylist, true);
     }
 
     function openPage(url) {
