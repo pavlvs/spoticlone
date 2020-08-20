@@ -1,5 +1,7 @@
 $(function () {
-    $('#mainContent').load(encodeURI(window.location.href), function () {});
+    $('#mainContent').load(encodeURI(window.location.href), function () {
+        //$('#searchInput').focus();
+    });
     const iconsFolder = 'assets/images/icons/';
     let repeat = false;
     let shuffle = false;
@@ -413,7 +415,9 @@ $(function () {
             url = url + '?';
         }
         var encodedUrl = encodeURI(url + '&userLoggedIn=' + userLoggedIn);
-        $('#mainContent').load(encodedUrl);
+        $('#mainContent').load(encodedUrl, function () {
+            $('#searchInput').focus();
+        });
 
         $('body').scrollTop(0);
         history.pushState(null, null, url);
