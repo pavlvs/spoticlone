@@ -12,3 +12,17 @@ function getSingleRecord($table, $id)
     $record = (array) $record;
     return json_encode($record);
 }
+
+function getRecordsBySearchTerm($table, $field, $term)
+{
+    $db = new Database();
+
+    $sql = "SELECT *
+            FROM `$table`
+            WHERE `$field`
+            LIKE '%$term%'";
+    $db->query($sql);
+    // $db->bind(':term', $term);
+    $records = $db->resultset();
+    return $records;
+}

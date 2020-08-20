@@ -40,37 +40,58 @@ switch ($action) {
         $template = new Template('../templates/register.html.php');
         $template->account = $account;
         break;
+
     case 'browse':
         $albums = $album->getRandomAlbums(10);
         $template = new Template('../templates/browse.php');
         $template->albums = $albums;
         break;
+
     case 'showalbum':
         $artist = $album->getArtist();
         $template = new Template('../templates/singleAlbum.php');
         $template->album = $album;
         $template->artist = $artist;
         break;
+
     case 'showartist':
         $template = new Template('../templates/singleArtist.php');
         $template->albums = $artist->getAlbums();
         $template->artist = $artist;
         break;
+
     case 'logout':
         $account->logout();
         //$template = new Template('../templates/register.html.php');
         break;
+
     case 'search':
+        //get the search term if passed by GET or by POST
+        $term = filter_input(INPUT_POST, 'term');
+        if ($term == NULL) {
+            $term = filter_input(INPUT_GET, 'term');
+            if ($term == NULL) {
+                $term = '';
+            }
+        }
+        $term = urldecode($term);
         $template = new Template('../templates/search.php');
+        $template->songs = getRecordsBySearchTerm('songs', 'title', $term);
+        $template->albums = getRecordsBySearchTerm('albums', 'title', $term);
+        $template->artists = getRecordsBySearchTerm('artists', 'name', $term);
+        $template->term = $term;
         break;
+
     case 'albumplaylist':
         $playlist = json_encode($album->getSongIds());
         echo $playlist;
         break;
+
     case 'artistplaylist':
         $playlist = json_encode($artist->getSongIds());
         echo $playlist;
         break;
+
     case 'userloggedin':
         if (isset($_SESSION['userLoggedIn'])) {
             $userLoggedIn = $_SESSION['userLoggedIn'];
@@ -79,11 +100,11 @@ switch ($action) {
         }
         echo $userLoggedIn;
         break;
+
     default:
-        # code...
         break;
 }
 if (isset($template)) {
     echo $template;
-    exit;
 }
+exit;

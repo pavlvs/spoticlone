@@ -5,7 +5,7 @@
         </span>
         <div class="group">
             <div class="navItem">
-                <span id="searchLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>/public/index.php?action=search" class="navItemLink">
+                <span id="searchLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>/public/index.php?action=search&term=" class="navItemLink">
                     Search <img src="<?= IMG_FOLDER ?>icons/search.png" alt="search" class="icon">
                 </span>
             </div>

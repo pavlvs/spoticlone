@@ -23,6 +23,8 @@ $(function () {
     console.log(userLoggedIn);
     //loadPage();
 
+    $('#searchInput').focus();
+
     class Audio {
         audio;
         currentlyPlaying;
@@ -64,6 +66,15 @@ $(function () {
             e.preventDefault();
         }
     );
+
+    $(document).on('keyup', '#searchInput', function () {
+        clearTimeout(timer);
+
+        timer = setTimeout(function () {
+            let val = $('#searchInput').val();
+            openPage('index.php?action=search&term=' + val);
+        }, 2000);
+    });
 
     $(document).on('click', '.albumLink', function () {
         openPage($(this).attr('data-link'));
