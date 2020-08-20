@@ -104,6 +104,10 @@ $(function () {
         openPage($(this).attr('data-link'));
     });
 
+    $('#yourMusicLink').click(function () {
+        openPage($(this).attr('data-link'));
+    });
+
     $('.navItemLink').click(function () {
         openPage($(this).attr('data-link'));
     });
@@ -181,6 +185,10 @@ $(function () {
         if (percentage >= 0 && percentage <= 1) {
             audio.volume = percentage;
         }
+    });
+
+    $('#newPlaylist').click(function () {
+        createPlaylist();
     });
 
     $(document).mouseup(function () {
@@ -547,4 +555,6 @@ $(function () {
         $.ajaxSetup({ async: true }); //return to default setting
         return returnData;
     }
+
+    function createPlaylist() {}
 });

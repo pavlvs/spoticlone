@@ -15,7 +15,7 @@
                 <span id="browseLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=browse&ajax=true" class="navItemLink">Browse</span>
             </div>
             <div class="navItem">
-                <span id="musicLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>templates/your_music.php" class="navItemLink">Your Music</span>
+                <span id="yourMusicLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>templates/your_music.php" class="navItemLink">Your Music</span>
             </div>
             <div class="navItem">
                 <span id="profileLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>templates/profile.php" class="navItemLink">Paul Shaw</span>

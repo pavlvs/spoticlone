@@ -115,6 +115,10 @@ switch ($action) {
         echo $userLoggedIn;
         break;
 
+    case 'yourmusic':
+        $template = new Template('../templates/your_music.php');
+        break;
+
     default:
         break;
 }

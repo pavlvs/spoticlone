@@ -7,8 +7,6 @@ include 'includes/includedFiles.php';
     <input type="text" name="" value="<?= $term; ?>" placeholder="Start typing..." id="searchInput" class="searchInput" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
 </div>
 
-
-
 <?php
 if ($term == "") {
     exit();
@@ -83,7 +81,7 @@ if ($term == "") {
 
         <div class="searchResultsRow">
             <div class="artistName">
-                <span class="" role="link" tabindex="0">
+                <span id="artistLink" class="" role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=showartist&artistId=<?= $artist->id ?>">
                     <?= $artist->name ?>
                 </span>
             </div>
@@ -99,7 +97,6 @@ if ($term == "") {
             No albums found matching <?= $term ?>
         </span>
     <?php endif; ?>
-
 
     <?php foreach ($albums as $album) : ?>
         <div class="gridViewItem">
