@@ -11,6 +11,7 @@ $(function () {
     let shufflePlaylist = [];
     let albumPlaylist = [];
     let artistPlaylist = [];
+    let searchPlaylist = [];
     let timer;
     let userLoggedIn;
 
@@ -75,6 +76,7 @@ $(function () {
         timer = setTimeout(function () {
             let val = $('#searchInput').val();
             openPage('index.php?action=search&term=' + val);
+            searchPlaylist = setSearchPlayList(val);
         }, 2000);
     });
 
@@ -195,6 +197,12 @@ $(function () {
         console.log($(this).attr('data-songid'));
         songId = $(this).attr('data-songid');
         setTrack(songId, artistPlaylist, true);
+    });
+
+    $(document).on('click', '#searchSongBtn', function () {
+        console.log($(this).attr('data-songid'));
+        songId = $(this).attr('data-songid');
+        setTrack(songId, searchPlaylist, true);
     });
 
     audio.addEventListener('canplay', function () {
@@ -503,14 +511,14 @@ $(function () {
         return returnData;
     }
 
-    //ajax call to get the song ids for the single album page playlist
-    function setArtistPlayList(albumId) {
+    //ajax call to get the song ids for the search page playlist
+    function setSearchPlayList(term) {
         $.ajaxSetup({ async: false }); //execute synchronously
         var returnData = null;
         $.post(
-            '/sandbox/spoticlone/public/index.php?action=artistplaylist',
+            '/sandbox/spoticlone/public/index.php?action=searchplaylist',
             {
-                albumId: albumId,
+                term: term,
             },
             function (data) {
                 data = JSON.parse(data);

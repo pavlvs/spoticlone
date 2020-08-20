@@ -26,3 +26,17 @@ function getRecordsBySearchTerm($table, $field, $term)
     $records = $db->resultset();
     return $records;
 }
+
+function getSongsBySearchTerm($term)
+{
+    $db = new Database();
+
+    $sql = "SELECT id
+            FROM `songs`
+            WHERE `title`
+            LIKE '%$term%'";
+    $db->query($sql);
+    // $db->bind(':term', $term);
+    $records = $db->resultset();
+    return $records;
+}

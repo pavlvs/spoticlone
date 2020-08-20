@@ -27,7 +27,7 @@ if ($term == "") {
 
         <?php
         $songIdArray = array();
-        $i = 1;
+        $i = 0;
         ?>
 
         <?php foreach ($songs as $song) :
@@ -37,19 +37,20 @@ if ($term == "") {
             array_push($songIdArray, $song->id);
             $albumSong = new Song($song->id);
             $albumArtist = $albumSong->getArtist();
+            $i++;
         ?>
             <li class="tracklistRow">
                 <div class="trackCount">
-                    <img class="play" src="<?= IMG_FOLDER ?>icons/play-white.png">
+                    <img class="play" id="searchSongBtn" src="<?= IMG_FOLDER ?>icons/play-white.png" data-songid="<?= $albumSong->getId() ?>">
                     <span class="trackNumber">
-                        $i
+                        <?= $i ?>
                     </span>
                 </div>
                 <div class="trackInfo">
                     <span class="trackName">
                         <?= $albumSong->getTitle() ?>
                     </span>
-                    <span class="trackArtist">
+                    <span class="trackArtist" data-link="<?= BASE_URI ?>public/index.php?action?showartist&artistId=<?= $albumArtist->getId() ?>">
                         <?= $albumArtist->getName(); ?>
                     </span>
                 </div>

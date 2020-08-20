@@ -92,6 +92,20 @@ switch ($action) {
         echo $playlist;
         break;
 
+    case 'searchplaylist':
+        //get the search term if passed by GET or by POST
+        $term = filter_input(INPUT_POST, 'term');
+        if ($term == NULL) {
+            $term = filter_input(INPUT_GET, 'term');
+            if ($term == NULL) {
+                $term = '';
+            }
+        }
+        $term = urldecode($term);
+        $playlist = json_encode(getSongsBySearchTerm($term));
+        echo $playlist;
+        break;
+
     case 'userloggedin':
         if (isset($_SESSION['userLoggedIn'])) {
             $userLoggedIn = $_SESSION['userLoggedIn'];
