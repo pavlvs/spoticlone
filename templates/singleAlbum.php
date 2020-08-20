@@ -7,7 +7,7 @@ include_once "includes/includedFiles.php";
     </div>
     <div class="rightSection">
         <h2 id="album" data-album="<?= $album->getId() ?>"><?= $album->getTitle(); ?></h2>
-        <p role="link" tabindex="0" data-link="artist.php?id=<?= $artist->getId() ?>">
+        <p role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=showArtist&artistId=<?= $artist->getId() ?>" id="artistLink">
             By <?= $artist->getName(); ?>
         </p>
         <p><?= $album->getNumberOfSongs(); ?> song(s)</p>
@@ -27,7 +27,7 @@ include_once "includes/includedFiles.php";
         ?>
             <li class="tracklistRow">
                 <div class="trackCount">
-                    <img class="play" src="<?= IMG_FOLDER ?>icons/play-white.png?>" data-songid="<?= $albumSong->getId() ?>" data-tempPlayList="true" id="songBtn">
+                    <img class="play" src="<?= IMG_FOLDER ?>icons/play-white.png?>" data-songid="<?= $albumSong->getId() ?>" data-tempPlayList="true" id="albumSongBtn">
                     <span class="trackNumber">
                         <?= $i ?>
                     </span>
@@ -36,7 +36,7 @@ include_once "includes/includedFiles.php";
                     <span class="trackName">
                         <?= $albumSong->getTitle() ?>
                     </span>
-                    <span class="trackArtist">
+                    <span class="trackArtist" data-link="<?= BASE_URI ?>public/index.php?action?showartist&artistId=<?= $albumArtist->getId() ?>">
                         <?= $albumArtist->getName() ?>
                     </span>
                 </div>

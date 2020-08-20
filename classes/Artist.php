@@ -34,11 +34,28 @@ class Artist
 				ORDER BY plays ASC";
 
 		$this->db->query($sql);
-		$songIds = $this->db->resultset();
+		$songs = $this->db->resultset();
+		$array = [];
+		foreach ($songs as $song) {
+			array_push($array, $song->id);
+		}
+
+		return $array;
+	}
+
+	public function getAlbums()
+	{
+		$sql = "SELECT *
+				FROM albums
+				WHERE artist='$this->id'
+				ORDER BY title ASC";
+
+		$this->db->query($sql);
+		$albums = $this->db->resultset();
 
 		$array = [];
-		foreach ($songIds as $songId) {
-			array_push($array, $songId);
+		foreach ($albums as $album) {
+			array_push($array, $album);
 		}
 
 		return $array;
