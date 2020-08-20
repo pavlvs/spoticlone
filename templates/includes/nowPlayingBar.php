@@ -4,12 +4,12 @@
         <div id="nowPlayingLeft">
             <div class="content">
                 <span id="albumLink" class="albumLink">
-                    <img src="" alt="square" id="albumArtwork" class="albumArtwork" role='link' tabindex='0'>
+                    <img src="" alt="square" id="albumArtwork" class="albumArtwork" role='link' tabindex='0' id="trackName" data-link="">
                 </span>
                 <div class="trackInfo">
-                    <span id="trackName" class="trackName" role='link' tabindex='0'>
+                    <span id="trackName" class="trackName" role='link' tabindex='0' data-link="">
                     </span>
-                    <span id="artistName" class="artistName" role='link' tabindex='0'>
+                    <span id="artistName" class="artistName" role='link' tabindex='0' data-link="">
                     </span>
                 </div>
             </div>

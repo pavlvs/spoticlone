@@ -77,6 +77,10 @@ $(function () {
         openPage($(this).attr('data-link'));
     });
 
+    $(document).on('click', '#playFirstSong', function () {
+        playFirstSong();
+    });
+
     $('#homeLink').click(function () {
         openPage($(this).attr('data-link'));
     });
@@ -89,8 +93,16 @@ $(function () {
         openPage($(this).attr('data-link'));
     });
 
-    $('#playFirstSong').click(function () {
-        playFirstSong();
+    $('#albumArtwork').click(function () {
+        openPage($(this).attr('data-link'));
+    });
+
+    $('#trackName').click(function () {
+        openPage($(this).attr('data-link'));
+    });
+
+    $('#artistName').click(function () {
+        openPage($(this).attr('data-link'));
     });
 
     $('#playBtn').click(function () {
@@ -225,6 +237,10 @@ $(function () {
                     function (data) {
                         let artist = JSON.parse(data);
                         $('#artistName').text(artist.name);
+                        $('#artistName').attr(
+                            'data-link',
+                            'index.php?action=showartist&artistId=' + artist.id
+                        );
                     }
                 );
                 $.post(
@@ -239,6 +255,14 @@ $(function () {
                         $('#albumArtwork').attr(
                             'src',
                             artworkDir + album.artworkPath
+                        );
+                        $('#albumArtwork').attr(
+                            'data-link',
+                            'index.php?action=showalbum&albumId=' + album.id
+                        );
+                        $('#trackName').attr(
+                            'data-link',
+                            'index.php?action=showalbum&albumId=' + album.id
                         );
                     }
                 );
