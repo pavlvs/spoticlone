@@ -109,6 +109,7 @@ $(function () {
     });
 
     $(document).on('click', '#cancelPlaylistBtn', function () {
+        $('#playlistName').val('');
         $('#newPlaylistModal').css('display', 'none');
     });
 

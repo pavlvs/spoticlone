@@ -9,9 +9,9 @@ include 'includes/includedFiles.php';
         <div class="buttonItems">
             <button id="newPlaylist" class="button spoticlone">NEW PLAYLIST</button>
             <div id="newPlaylistModal" class="newPlaylistModal">
-                <input type="text" id="playlistName" class="playlistInput">
-                <button id="addPlaylistBtn" class="addPlaylistBtn">Add</button>
-                <button id="cancelPlaylistBtn" class="addPlaylistBtn">Cancel</button>
+                <input type="text" id="playlistName" class="playlistName" placeholder="My Playlist#7">
+                <button id="addPlaylistBtn" class="addPlaylistBtn button button-small spoticlone">Add</button>
+                <button id="cancelPlaylistBtn" class="cancelPlaylistBtn">X</button>
             </div>
         </div>
 
