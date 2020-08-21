@@ -471,3 +471,14 @@ input:focus {
     border: 3px solid #282828;
     padding: 10px;
 }
+
+.playlistInput {
+    background-color: #777676;
+}
+
+.addPlaylistBtn {
+    color: #333;
+}
+.newPlaylistModal {
+    display: none;
+}

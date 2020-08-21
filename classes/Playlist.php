@@ -14,7 +14,7 @@ class Playlist
     {
         $this->db = new Database();
 
-        if (!is_array($data)) {
+        if (!is_object($data)) {
             //data is an id string
             $sql = "SELECT *
                     FROM playlists

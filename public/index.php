@@ -27,6 +27,12 @@ if ($action == NULL) {
         $action = 'register';
     }
 }
+
+if (isset($_SESSION['userLoggedIn'])) {
+    $user = new User($_SESSION['userLoggedIn']);
+} else {
+    $user = '';
+}
 // initialize objects
 $database = new Database();
 $account = new Account();
@@ -117,6 +123,8 @@ switch ($action) {
 
     case 'yourmusic':
         $template = new Template('../templates/your_music.php');
+        $template->playlists = getPlaylistsByOwner($user->getUsername());
+        $template->user = $user;
         break;
 
     default:

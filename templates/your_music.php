@@ -8,21 +8,23 @@ include 'includes/includedFiles.php';
 
         <div class="buttonItems">
             <button id="newPlaylist" class="button spoticlone">NEW PLAYLIST</button>
+            <div id="newPlaylistModal" class="newPlaylistModal">
+                <input type="text" id="playlistName" class="playlistInput">
+                <button id="addPlaylistBtn" class="addPlaylistBtn">Add</button>
+                <button id="cancelPlaylistBtn" class="addPlaylistBtn">Cancel</button>
+            </div>
         </div>
 
         <?php
-        $username = $userLoggedIn->getUsername();
-
-        $playlistsQuery = mysqli_query($db, "SELECT * FROM playlists WHERE owner = '$username'");
+        $username = $user->getUsername();
         ?>
 
-        <?php if (mysqli_num_rows($playlistsQuery) == 0) : ?>
+        <?php if (count($playlists) == 0) : ?>
             echo "<span class='noResults'>You do not have any playlists yet</span>";
         <?php endif; ?>
 
-        <?php foreach ($foos as $foo) :
-
-            $playlist = new Playlist($db, $row);
+        <?php foreach ($playlists as $playlist) :
+            $playlist = new Playlist($playlist);
         ?>
 
             <div class="gridViewItem" role="link" tabindex="0">
@@ -30,7 +32,7 @@ include 'includes/includedFiles.php';
                     <image src="<?= IMG_FOLDER ?>icons/playlist.png">
                 </div>
                 <div class="gridViewInfo">
-                    . $playlist->getName() .
+                    <?= $playlist->getName() ?>
                 </div>
             </div>
         <?php endforeach; ?>

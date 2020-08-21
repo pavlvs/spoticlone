@@ -40,3 +40,17 @@ function getSongsBySearchTerm($term)
     $records = $db->resultset();
     return $records;
 }
+
+function getPlaylistsByOwner($user)
+{
+    $db = new Database();
+
+    $sql = "SELECT *
+    FROM playlists
+    WHERE owner = :owner";
+
+    $db->query($sql);
+    $db->bind(':owner', $user);
+    $playlists = $db->resultset();
+    return $playlists;
+}

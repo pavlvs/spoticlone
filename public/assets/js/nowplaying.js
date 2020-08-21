@@ -96,6 +96,22 @@ $(function () {
         playFirstSong();
     });
 
+    $(document).on('click', '#addPlaylistBtn', function () {
+        console.log('clicked');
+        const playlistName = $('#playlistName').val();
+        console.log(playlistName);
+        createPlaylist(playlistName);
+        $('#newPlaylistModal').css('display', 'none');
+    });
+
+    $(document).on('click', '#newPlaylist', function () {
+        $('#newPlaylistModal').css('display', 'block');
+    });
+
+    $(document).on('click', '#cancelPlaylistBtn', function () {
+        $('#newPlaylistModal').css('display', 'none');
+    });
+
     $('#homeLink').click(function () {
         openPage($(this).attr('data-link'));
     });
@@ -185,10 +201,6 @@ $(function () {
         if (percentage >= 0 && percentage <= 1) {
             audio.volume = percentage;
         }
-    });
-
-    $('#newPlaylist').click(function () {
-        createPlaylist();
     });
 
     $(document).mouseup(function () {
@@ -556,5 +568,18 @@ $(function () {
         return returnData;
     }
 
-    function createPlaylist() {}
+    function createPlaylist(name) {
+        console.log(name);
+
+        $.post(
+            '../includes/handlers/ajax/createPlaylist.php',
+            {
+                name: name,
+                owner: userLoggedIn,
+            },
+            function () {
+                openPage('index.php?action=yourmusic');
+            }
+        );
+    }
 });

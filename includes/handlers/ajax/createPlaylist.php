@@ -1,13 +1,21 @@
 <?php
-include '../../config.php';
+require_once __DIR__ . '/../../../core/init.php';
 
-if(isset($_POST['name']) && isset($_POST['username'])){
+if (isset($_POST['name']) && isset($_POST['owner'])) {
 
     $name = $_POST['name'];
-    $username = $_POST['username'];
-    $date = date("Y-m-d");
-    $query = mysqli_query($db, "INSERT INTO playlists VALUES('', '$name', '$username', '$date')");
+    $owner = $_POST['owner'];
+    //echo $name . ' ' . $owner;
+    //exit;
+    $date = date("Y-m-d H:i:s");
+
+    $db = new Database();
+
+    $sql = "INSERT INTO playlists
+            VALUES ('', '$name', '$owner', '$date')";
+    $db->query($sql);
+    $db->execute();
 } else {
-    echo "Name or username not passed nto file";
-    // TODO:
+    echo "Name or owner not passed nto file";
+    exit;
 }
