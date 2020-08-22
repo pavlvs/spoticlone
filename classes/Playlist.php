@@ -18,7 +18,7 @@ class Playlist
             //data is an id string
             $sql = "SELECT *
                     FROM playlists
-                    WHERE id=':data";
+                    WHERE id=:data";
             $this->db->query($sql);
             $this->db->bind(':data', $data);
             $data = $this->db->single();
@@ -63,8 +63,8 @@ class Playlist
         $this->db->query($sql);
         $songIds = $this->db->resultset();
         $array = [];
-        foreach ($songIds as $songId) {
-            array_push($array, $songId);
+        foreach ($songIds as $playlistSong) {
+            array_push($array, $playlistSong->songId);
         }
         return $array;
     }

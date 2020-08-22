@@ -27,7 +27,7 @@ include 'includes/includedFiles.php';
             $playlist = new Playlist($playlist);
         ?>
 
-            <div class="gridViewItem" role="link" tabindex="0">
+            <div class="gridViewItem" id="playlistLink" role="link" tabindex="0" data-link="<?= BASE_URI ?>public/index.php?action=showplaylist&playlistId=<?= $playlist->getId() ?>">
                 <div class="playlistImage">
                     <image src="<?= IMG_FOLDER ?>icons/playlist.png">
                 </div>

@@ -19,6 +19,15 @@ if ($artistId == NULL) {
     }
 }
 
+//get the playlistId if passed by GET or by POST
+$playlistId = filter_input(INPUT_POST, 'playlistId');
+if ($playlistId == NULL) {
+    $playlistId = filter_input(INPUT_GET, 'playlistId');
+    if ($playlistId == NULL) {
+        $playlistId = '';
+    }
+}
+
 //get the action passed by GET or by POST if none default to register
 $action = strtolower(filter_input(INPUT_POST, 'action'));
 if ($action == NULL) {
@@ -38,6 +47,9 @@ $database = new Database();
 $account = new Account();
 $album = new Album($albumId);
 $artist = new Artist($artistId);
+if (isset($playlistId) && $playlistId != '') {
+    $playlist = new Playlist($playlistId);
+}
 //$song = new Song($id);
 
 switch ($action) {
@@ -64,6 +76,11 @@ switch ($action) {
         $template = new Template('../templates/singleArtist.php');
         $template->albums = $artist->getAlbums();
         $template->artist = $artist;
+        break;
+
+    case 'showplaylist':
+        $template = new Template('../templates/singlePlaylist.php');
+        $template->playlist = $playlist;
         break;
 
     case 'logout':
@@ -95,6 +112,11 @@ switch ($action) {
 
     case 'artistplaylist':
         $playlist = json_encode($artist->getSongIds());
+        echo $playlist;
+        break;
+
+    case 'playlistplaylist':
+        $playlist = json_encode($playlist->getSongIds());
         echo $playlist;
         break;
 

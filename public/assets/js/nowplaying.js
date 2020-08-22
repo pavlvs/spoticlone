@@ -12,15 +12,18 @@ $(function () {
     let albumPlaylist = [];
     let artistPlaylist = [];
     let searchPlaylist = [];
+    let playlistPlaylist = [];
     let timer;
     let userLoggedIn;
 
     const urlParams = new URLSearchParams(window.location.href);
     const albumId = urlParams.get('albumId');
     const artistId = urlParams.get('artistId');
+    const playlistId = urlParams.get('playlistId');
 
     albumPlaylist = setTempPlayList('albums');
     artistPlaylist = setTempPlayList('artists');
+    playlistPlaylist = setTempPlayList('playlists');
 
     userLoggedIn = setUserLoggedIn();
     console.log(userLoggedIn);
@@ -85,6 +88,10 @@ $(function () {
     });
 
     $(document).on('click', '#artistLink', function () {
+        openPage($(this).attr('data-link'));
+    });
+
+    $(document).on('click', '#playlistLink', function () {
         openPage($(this).attr('data-link'));
     });
 
@@ -224,6 +231,12 @@ $(function () {
         console.log($(this).attr('data-songid'));
         songId = $(this).attr('data-songid');
         setTrack(songId, searchPlaylist, true);
+    });
+
+    $(document).on('click', '#playlistSongBtn', function () {
+        console.log($(this).attr('data-songid'));
+        songId = $(this).attr('data-songid');
+        setTrack(songId, playlistPlaylist, true);
     });
 
     audio.addEventListener('canplay', function () {
@@ -494,40 +507,83 @@ $(function () {
     function setTempPlayList(table) {
         $.ajaxSetup({ async: false }); //execute synchronously
         var returnData = null;
-        if (table == 'albums') {
-            $.post(
-                '/sandbox/spoticlone/public/index.php?action=albumplaylist',
-                {
-                    albumId: albumId,
-                },
-                function (data) {
-                    data = JSON.parse(data);
-                    songIds = [];
-                    data.forEach((element) => {
-                        element = parseInt(element);
-                        songIds.push(element);
-                    });
-                    returnData = songIds;
-                }
-            );
-        } else {
-            $.post(
-                '/sandbox/spoticlone/public/index.php?action=artistplaylist',
-                {
-                    artistId: artistId,
-                },
-                function (data) {
-                    data = JSON.parse(data);
-                    songIds = [];
-                    data.forEach((element) => {
-                        element = parseInt(element);
-                        songIds.push(element);
-                    });
-                    returnData = songIds;
-                }
-            );
+        switch (table) {
+            case 'albums':
+                $.post(
+                    '/sandbox/spoticlone/public/index.php?action=albumplaylist',
+                    {
+                        albumId: albumId,
+                    },
+                    function (data) {
+                        data = JSON.parse(data);
+                        songIds = [];
+                        data.forEach((element) => {
+                            element = parseInt(element);
+                            songIds.push(element);
+                        });
+                        returnData = songIds;
+                    }
+                );
+                break;
+            case 'artists':
+                $.post(
+                    '/sandbox/spoticlone/public/index.php?action=artistplaylist',
+                    {
+                        artistId: artistId,
+                    },
+                    function (data) {
+                        data = JSON.parse(data);
+                        songIds = [];
+                        data.forEach((element) => {
+                            element = parseInt(element);
+                            songIds.push(element);
+                        });
+                        returnData = songIds;
+                    }
+                );
+                break;
+            case 'playlists':
+                $.post(
+                    '/sandbox/spoticlone/public/index.php?action=playlistplaylist',
+                    {
+                        playlistId: playlistId,
+                    },
+                    function (data) {
+                        data = JSON.parse(data);
+                        songIds = [];
+                        data.forEach((element) => {
+                            element = parseInt(element);
+                            songIds.push(element);
+                        });
+                        returnData = songIds;
+                    }
+                );
+                break;
         }
 
+        $.ajaxSetup({ async: true }); //return to default setting
+        return returnData;
+    }
+
+    //ajax call to get the song ids for the playlist page playlist
+    function setSearchPlayList(playlistId) {
+        $.ajaxSetup({ async: false }); //execute synchronously
+        var returnData = null;
+        $.post(
+            '/sandbox/spoticlone/public/index.php?action=playlistPlaylist',
+            {
+                term: term,
+            },
+            function (data) {
+                data = JSON.parse(data);
+                songIds = [];
+                data.forEach((element) => {
+                    element = parseInt(element);
+                    songIds.push(element);
+                });
+                returnData = songIds;
+            }
+        );
         $.ajaxSetup({ async: true }); //return to default setting
         return returnData;
     }
