@@ -112,10 +112,11 @@ $(function () {
     });
 
     $(document).on('click', '#deletePlaylistBtn', function () {
-        console.log('clicked');
-        const playlist = $(this).attr('data-playlist');
-        console.log(playlist);
-        deletePlaylist(playlist);
+        const sure = confirm('Are you sure you want to delete this playlist?');
+        if (sure) {
+            const playlist = $(this).attr('data-playlist');
+            deletePlaylist(playlist);
+        }
     });
 
     $(document).on('click', '#newPlaylist', function () {
