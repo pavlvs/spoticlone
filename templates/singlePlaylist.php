@@ -14,7 +14,7 @@ $owner = new User($playlist->getOwner());
         <h2><?= $playlist->getName(); ?></h2>
         <p>By <?= $playlist->getOwner(); ?></p>
         <p><?= $playlist->getNumberOfSongs(); ?> song(s)</p>
-        <button class="button spoticlone">DELETE PLAYLIST</button>
+        <button id="deletePlaylistBtn" class="button spoticlone" data-playlist="<?= $playlist->getId() ?>">DELETE PLAYLIST</button>
     </div>
 </div>
 

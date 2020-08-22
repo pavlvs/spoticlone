@@ -111,6 +111,13 @@ $(function () {
         $('#newPlaylistModal').css('display', 'none');
     });
 
+    $(document).on('click', '#deletePlaylistBtn', function () {
+        console.log('clicked');
+        const playlist = $(this).attr('data-playlist');
+        console.log(playlist);
+        deletePlaylist(playlist);
+    });
+
     $(document).on('click', '#newPlaylist', function () {
         $('#newPlaylistModal').css('display', 'block');
     });
@@ -633,6 +640,20 @@ $(function () {
             {
                 name: name,
                 owner: userLoggedIn,
+            },
+            function () {
+                openPage('index.php?action=yourmusic');
+            }
+        );
+    }
+
+    function deletePlaylist(id) {
+        console.log(name);
+
+        $.post(
+            '../includes/handlers/ajax/deletePlaylist.php',
+            {
+                playlistId: id,
             },
             function () {
                 openPage('index.php?action=yourmusic');
